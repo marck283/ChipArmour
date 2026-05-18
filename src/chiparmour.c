@@ -21,24 +21,17 @@ limitations under the License.
 #include "../inc/chiparmour.h"
 
 #define ca_ret_u32(value)  _ca_ret_u32(value, cp_get_magic())
-
-static uint32_t _ca_sram_FEED7431 = 0xFEED7431;
-static const uint32_t _ca_flash_55A88519 = 0x55A88519;
-static uint32_t _ca_panicflag = 0;
-
-
 #define ca_true()  (_ca_sram_FEED7431 == 0xFEED7431)
 #define ca_false() (_ca_sram_FEED7431 == 0xFE000000)
 
-#define ca_panic() {_ca_panicflag++; _ca_panic();}
+int ca_atmine(void)
+{}
 
-/** 
-  Jumps to the panic function if one of two comparisons fail.
-  */
+int ca_atwait(void)
+{}
 
-#define ca_landmine() { if(_ca_sram_FEED7431 != 0xFEED7431){ca_panic();} \
-                        if(_ca_flash_55A88519 != 0x55A88519){ca_panic();} \
-                        if(_ca_sram_FEED7431 == _ca_flash_55A88519){ca_panic();} }
+int ca_fastwait(void)
+{}
 
 /**
   Returns an unsigned 32-bit value, but adds armour around the return
@@ -52,15 +45,17 @@ ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay)
     uint32_t local_value;    
     ca_landmine();
     
-    if (value.invvalue != ~value.value){
+    __cmp_and_panic(value.invvalue, ~value.value, !=);
+    /*if (value.invvalue != ~value.value){
         ca_panic();
-    }
+    }*/
     
     local_value = value.value - delay;
     
-    if (value.invvalue != ~value.value){
+    __cmp_and_panic(value.invvalue, ~value.value, !=);
+    /*if (value.invvalue != ~value.value){
         ca_panic();
-    }
+    }*/
     
     ca_uint32_t invalid_rv;
     invalid_rv.value = 0;
@@ -69,7 +64,9 @@ ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay)
     while(ca_true()){
         i++;
         local_value++;
-        if (i > delay) { ca_panic(); }
+        
+        __cmp_and_panic(i, delay, >);
+        //if (i > delay) { ca_panic(); }
         
         ca_landmine();
         
@@ -84,7 +81,8 @@ ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay)
         ca_landmine();
         if (i == delay){return invalid_rv;}
         
-        if (i > delay) { ca_panic(); }
+        __cmp_and_panic(i, delay, >);
+        //if (i > delay) { ca_panic(); }
     }
     
     ca_landmine();
@@ -95,51 +93,52 @@ ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay)
 
 typedef void (*ca_funcpointer)(void *);
 
+#define __check_and_set_min(input, min) \
+do { \
+    if (input.value < min.value){ \
+        input.value = min.value; \
+        input.invvalue = min.invvalue; \
+    } \
+} while(0)
+
+#define __check_and_set_max(input, max) \
+do { \
+    if (input.value > max.value){ \
+        input.value = max.value; \
+        input.invvalue = max.invvalue; \
+    } \
+} while(0)
+
+/**
+ * @brief Checks if the input is within the min and max values, if not sets it to the min or max. 
+ * Jumps to panic if the input value is tampered with during the function.
+ * 
+ * @param input The value to check and limit
+ * @param min The minimum value allowed
+ * @param max The maximum value allowed
+ * @return uint32_t The limited value
+ */
 uint32_t _ca_limit_u32(ca_uint32_t input, ca_uint32_t min, ca_uint32_t max)
 {
     ca_landmine();
     
     //Quick version - just have multiple checks
     
-    if (input.value < min.value){
-        input.value = min.value;
-        input.invvalue = min.invvalue;
-    }
-    
-    if (input.value > max.value){
-        input.value = max.value;
-        input.invvalue = max.invvalue;
-    }
+    __check_and_set_min(input, min);
+    __check_and_set_max(input, max);
   
-    if (input.invvalue != ~input.value){
-        ca_panic();
-    }
-    if (input.value < min.value){
-        input.value = min.value;
-        input.invvalue = min.invvalue;
-    }
-    
-    if (input.value > max.value){
-        input.value = max.value;
-        input.invvalue = max.invvalue;
-    }
-    
-    if (input.invvalue != ~input.value){
-        ca_panic();
-    }
-    if (input.value < min.value){
-        input.value = min.value;
-        input.invvalue = min.invvalue;
-    }
-    
-    if (input.value > max.value){
-        input.value = max.value;
-        input.invvalue = max.invvalue;
-    }
+    __cmp_and_panic(input.invvalue, ~input.value, !=);
+
+    __check_and_set_min(input, min);    
+    __check_and_set_max(input, max);
   
-    if (input.invvalue != ~input.value){
-        ca_panic();
-    }
+    __cmp_and_panic(input.invvalue, ~input.value, !=);
+
+    __check_and_set_min(input, min);    
+    __check_and_set_max(input, max);
+  
+    __cmp_and_panic(input.invvalue, ~input.value, !=);
+    
     ca_landmine();
     ca_panic();
     return input.value;
@@ -158,15 +157,20 @@ ca_return_t _ca_compare_u32_eq(ca_uint32_t op1,
                   ca_fptr_voidptr_t  unequal_function,
                   void * unequal_func_param)
 {
+    uintptr_t equal_function_mask = (uintptr_t)equal_function;
+    uintptr_t equal_func_param_mask = (uintptr_t)equal_func_param;
+    uintptr_t unequal_function_mask = (uintptr_t)unequal_function;
+    uintptr_t unequal_func_param_mask = (uintptr_t)unequal_func_param;
+
     ca_landmine();
     
     //Mask values we'll jump to, make later FI skips increase chance we jump
     //to some invalid value.
-    equal_function = (CA_CMP_LOOPS << 15)^(uint32_t)equal_function;
-    equal_func_param = (CA_CMP_LOOPS << 15)^(uint32_t)equal_func_param;
+    equal_function_mask ^= (CA_CMP_LOOPS << 15);
+    equal_func_param_mask ^= (CA_CMP_LOOPS << 15);
     ca_landmine();
-    unequal_function = (CA_CMP_LOOPS << 15)^(uint32_t)unequal_function;
-    unequal_func_param = (CA_CMP_LOOPS << 15)^(uint32_t)unequal_func_param;
+    unequal_function_mask ^= (CA_CMP_LOOPS << 15);
+    unequal_func_param_mask ^= (CA_CMP_LOOPS << 15);
     
     uint32_t equal = 0;
     uint32_t unequal = 0;
@@ -239,24 +243,25 @@ CA_DO_LOOP:
         i++;*/
         
         ca_landmine();
-        if ((i != equal) && (i != unequal)){ ca_panic(); }
+        __cmp_and_panic(i != equal, i != unequal, &&);
         
         if(i == CA_CMP_LOOPS) { 
             ca_landmine();
             if (i == equal) {
-                equal_function = (equal << 15) ^ (uint32_t)equal_function;
-                equal_func_param = (equal << 15) ^ (uint32_t)equal_func_param;
+                equal_function_mask ^= (equal << 15);
+                equal_func_param_mask ^= (equal << 15);
                 goto CA_DO_COMPARE;
             } else if (i == unequal) {
-                unequal_function = (unequal << 15) ^ (uint32_t)unequal_function;
-                unequal_func_param = (equal << 15) ^ (uint32_t)unequal_func_param;
+                unequal_function_mask ^= (unequal << 15);
+                unequal_func_param_mask ^= (equal << 15);
                 goto CA_DO_COMPARE;
             } else {
                 ca_panic();
             }
         }
         
-        if (i > CA_CMP_LOOPS){ca_panic();}
+        __cmp_and_panic(i, CA_CMP_LOOPS, >);
+        //if (i > CA_CMP_LOOPS){ca_panic();}
         
         ca_landmine();
     }
@@ -277,16 +282,21 @@ ca_return_t ca_compare_func_eq( ca_fptr_voidptr_array_t    get_value_func,
                              ca_fptr_voidptr_t          unequal_function,
                              void *                     unequal_func_param)
 {
+    uintptr_t equal_function_mask = (uintptr_t)equal_function;
+    uintptr_t equal_func_param_mask = (uintptr_t)equal_func_param;
+    uintptr_t unequal_function_mask = (uintptr_t)unequal_function;
+    uintptr_t unequal_func_param_mask = (uintptr_t)unequal_func_param;
+
     ca_landmine();
     
     get_value_func(get_value_func_param, get_value_func_return);
     //Mask values we'll jump to, make later FI skips increase chance we jump
     //to some invalid value.
-    equal_function = (CA_CMP_LOOPS << 15)^(uint32_t)equal_function;
-    equal_func_param = (CA_CMP_LOOPS << 15)^(uint32_t)equal_func_param;
+    equal_function_mask ^= (CA_CMP_LOOPS << 15);
+    equal_func_param_mask ^= (CA_CMP_LOOPS << 15);
     ca_landmine();
-    unequal_function = (CA_CMP_LOOPS << 15)^(uint32_t)unequal_function;
-    unequal_func_param = (CA_CMP_LOOPS << 15)^(uint32_t)unequal_func_param;
+    unequal_function_mask ^= (CA_CMP_LOOPS << 15);
+    unequal_func_param_mask ^= (CA_CMP_LOOPS << 15);
     
     uint32_t equal = 0;
     uint32_t unequal = 0;
@@ -365,24 +375,25 @@ CA_DO_LOOP:
         i++;
         
         ca_landmine();
-        if ((i != equal) && (i != unequal)){ ca_panic(); }
+
+        __cmp_and_panic(i != equal, i != unequal, &&);
         
         if(i == CA_CMP_LOOPS) { 
             ca_landmine();
             if (i == equal) {
-                equal_function = (equal << 15) ^ (uint32_t)equal_function;
-                equal_func_param = (equal << 15) ^ (uint32_t)equal_func_param;
+                equal_function_mask ^= (equal << 15);
+                equal_func_param_mask ^= (equal << 15);
                 goto CA_DO_COMPARE;
             } else if (i == unequal) {
-                unequal_function = (unequal << 15) ^ (uint32_t)unequal_function;
-                unequal_func_param = (equal << 15) ^ (uint32_t)unequal_func_param;
+                unequal_function_mask ^= (unequal << 15);
+                unequal_func_param_mask ^= (equal << 15);
                 goto CA_DO_COMPARE;
             } else {
                 ca_panic();
             }
         }
         
-        if (i > CA_CMP_LOOPS){ca_panic();}
+        __cmp_and_panic(i, CA_CMP_LOOPS, >);
         
         ca_landmine();
     }
@@ -400,31 +411,14 @@ void ca_state_machine(int statenum)
         return;
     }
     
-    if (++ca_stored_state != statenum){
-        ca_panic();
-    }
-    
-    if (ca_stored_state != statenum){
-        ca_panic();
-    }
+    __cmp_and_panic(++ca_stored_state, statenum, !=);    
+    __cmp_and_panic(ca_stored_state, statenum, !=);
     
     return;
 }
-
-int ca_atmine(void)
-{}
-
-int ca_atwait(void)
-{}
-
-int ca_fastwait(void)
-{}
 
 ca_uint32_t ca_retfast_u32(uint32_t value)
 {
     ca_uint32_t ret = {value, ~value};
     return ret;
 }
-
-int ca_fullpanic(void)
-{puts("FULL PANIC!"); while(1);}

@@ -23,6 +23,36 @@ limitations under the License.
 #ifndef CHIPARMOUR_H
 #define CHIPARMOUR_H
 
+static uint32_t _ca_panicflag = 0;
+static uint32_t _ca_sram_FEED7431 = 0xFEED7431;
+static const uint32_t _ca_flash_55A88519 = 0x55A88519;
+
+int ca_fullpanic(void) {
+    while(1);
+}
+
+//#define ca_panic() {_ca_panicflag++; _ca_panic();}
+#define ca_panic() { \
+    _ca_panicflag++; \
+    ca_fullpanic(); \
+}
+
+#define __cmp_and_panic(x, y, op) \
+do { \
+    if ((x) op (y)) { \
+        ca_panic(); \
+    } \
+} while(0)
+
+/** 
+  Jumps to the panic function if one of two comparisons fail.
+  */
+#define ca_landmine() { \
+    __cmp_and_panic(_ca_sram_FEED7431, 0xFEED7431, !=); \
+    __cmp_and_panic(_ca_flash_55A88519, 0x55A88519, !=); \
+    __cmp_and_panic(_ca_sram_FEED7431, _ca_flash_55A88519, ==); \
+}
+
 /***************************************************************************
  Typedefs
  ***************************************************************************/
@@ -122,7 +152,7 @@ void ca_hal_mpu_init(void);
  ***************************************************************************/
 
 #define CA_ROP_SET_MAX_RETURNS(functionname, maxreturns) \
-    static uint32_t ca_functionname_max_returns = maxreturns;
+    enum { ca_functionname_max_returns = (maxreturns) };
 
 #define CA_ROP_RETURNADDRS_ARRAY(functionname) \
     static void * ca_functionname_valid_returnaddrs[ca_functionname_max_returns];
@@ -134,16 +164,12 @@ do { \
     uint32_t ca_loopindx; \
     for(ca_loopindx = 0; ca_loopindx < len(ca_functionname_valid_returnaddrs); ca_loopindx++){ \
         /* The zero flag indicates end of array reached, shouldn't happen */ \
-        if (ca_functionname_valid_returnaddrs[ca_loopindx] == 0){ \
-            ca_panic(); \
-        } \
+        __cmp_and_panic(ca_functionname_valid_returnaddrs[ca_loopindx], 0, ==); \
         if (ca_functionname_valid_returnaddrs[ca_loopindx] == ca_ra){ \
             break; \
         } \
     } \
-    if (ca_loopindx > len(ca_functionname_valid_returnaddrs)) { \
-        ca_panic(); \
-    } \
+    __cmp_and_panic(ca_loopindx, len(ca_functionname_valid_returnaddrs), >=); \
  } while(0)
 
 /***************************************************************************
@@ -176,7 +202,9 @@ void ca_unlock_secure1(uint32_t unlock_key);
  ***************************************************************************/
 
 /**
-    Setup MPU to armour memory spaces, init RNG if possible, etc.
+ * @brief Setup MPU to armour memory spaces, init RNG if possible, etc.
+ * @note Use `init_mpu()` from `mspm0l2228_mpu_config/mpu.h` to set up the MPU 
+ * with the desired memory protections for the MSPM0L2228 board.
 */
 void ca_init(void);
 

@@ -22,6 +22,8 @@ limitations under the License.
 /* See header file for function description (in one place to avoid doxygen problems). */
 #include "chiparmour.h"
 
+extern uint32_t CA_SECURE1_UNLOCK_KEY;
+
 /***************************************************************************
  Memory space 'secure1' armouring functions.
  ***************************************************************************/
@@ -30,7 +32,7 @@ limitations under the License.
 CA_ROP_SET_MAX_RETURNS(ca_unlock_secure1, MAX_SECURE1_RETURN_LOCS);
 
 // Must run static analysis step to mark all call locations
-CA_VALID_RETURNADDRS_ARRAY(ca_unlock_secure1);
+CA_ROP_RETURNADDRS_ARRAY(ca_unlock_secure1);
  
 void ca_lock_secure1(void)
 {
@@ -43,7 +45,7 @@ void ca_unlock_secure1(uint32_t unlock_key)
     
     ca_landmine();
     
-    while(True)
+    while(1)
     {
         if (unlock_key == CA_SECURE1_UNLOCK_KEY){
             matchcnt++;            
