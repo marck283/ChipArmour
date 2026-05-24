@@ -1,6 +1,6 @@
 /**
- * @defgroup MPU MPU defines
- * @brief Constants and error codes used for MPU configuration.
+ * @defgroup MPU MPU configuration
+ * @brief Constants, error codes, and functions used for MPU configuration.
  * @{
  */
 
@@ -27,15 +27,15 @@
 
 /** @} */
 
-#include "ti_msp_dl_config.h"
-#include "armv7m_mpu.h"
-
 /**
- * @brief Memory Protection Unit (MPU) region configurations for the HSM firmware.
+ * @brief Memory Protection Unit (MPU) region configuration utilities for the HSM firmware.
  * @author Marco Lasagna
  * @date April 2026
  * 
  */
+
+#include "ti_msp_dl_config.h"
+#include "armv7m_mpu.h"
 
 /**
  * @enum mpu_access_t
@@ -66,6 +66,8 @@ typedef struct mpu_region_t {
 } mpu_region_t;
 
 /**
+ * @ingroup MPU
+ * 
  * @brief Set the MPU region with the specified configuration. 
  * 
  * @param region The MPU region configuration to apply.
@@ -96,7 +98,9 @@ static inline void set_mpu_region(mpu_region_t region) {
                      region.region_size));
 }
 
- /**
+/**
+ * @ingroup MPU
+ * 
  * @brief Configure and enable the Memory Protection Unit (MPU).
  *
  * This function installs the MPU regions used to isolate privileged kernel
@@ -112,9 +116,6 @@ static inline void set_mpu_region(mpu_region_t region) {
  *       guard region.
  * @warning This function assumes Cortex-M0+ MPU with DREGION=8; re-validate MPU_TYPE.DREGION 
  *          when writing MPU protections for a different ARM MCU.
- * 
- * @warning The function returns early if `regions` is NULL, which should not 
- *          happen in practice as the MPU configuration is expected to be correctly defined.
  */
 static inline uint8_t init_mpu(mpu_region_t regions[MPU_REGIONS_NUM]) {
     if (regions == NULL) {

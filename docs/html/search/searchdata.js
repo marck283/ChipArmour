@@ -2,26 +2,29 @@ var indexSectionsWithContent =
 {
   0: "abcdeilmnoprstuv",
   1: "acim",
-  2: "r",
-  3: "dm",
-  4: "abcdelnopstuv"
+  2: "is",
+  3: "r",
+  4: "cm",
+  5: "abcdelnopstuv"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "variables",
-  3: "groups",
-  4: "pages"
+  2: "functions",
+  3: "variables",
+  4: "groups",
+  5: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "All",
   1: "Classes",
-  2: "Variables",
-  3: "Modules",
-  4: "Pages"
+  2: "Functions",
+  3: "Variables",
+  4: "Modules",
+  5: "Pages"
 };
 

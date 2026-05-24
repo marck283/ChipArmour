@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ChipArmour: MPU defines</title>
+<title>ChipArmour: MPU configuration</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d2/d4f/group__
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">MPU defines </div></div>
+  <div class="headertitle"><div class="title">MPU configuration </div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -133,10 +133,87 @@ Macros</h2></td></tr>
 <tr class="memitem:gaa90cac659d18e8ef6294c7ae337f6b58" id="r_gaa90cac659d18e8ef6294c7ae337f6b58"><td class="memItemLeft"><a id="gaa90cac659d18e8ef6294c7ae337f6b58" name="gaa90cac659d18e8ef6294c7ae337f6b58"></a>
 #define&#160;</td><td class="memItemRight"><b>SUCCESS</b>&#160;&#160;&#160;0</td></tr>
 <tr class="memdesc:gaa90cac659d18e8ef6294c7ae337f6b58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Success code. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga550cf7e73ae1ae8c1c22847c28ed8b9c" id="r_ga550cf7e73ae1ae8c1c22847c28ed8b9c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga550cf7e73ae1ae8c1c22847c28ed8b9c">set_mpu_region</a> (<a class="el" href="../../df/da9/structmpu__region__t.html">mpu_region_t</a> region)</td></tr>
+<tr class="memdesc:ga550cf7e73ae1ae8c1c22847c28ed8b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the MPU region with the specified configuration.  <br /></td></tr>
+<tr class="memitem:gad8290908b2c33ce92fae22535c5c88b0" id="r_gad8290908b2c33ce92fae22535c5c88b0"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#gad8290908b2c33ce92fae22535c5c88b0">init_mpu</a> (<a class="el" href="../../df/da9/structmpu__region__t.html">mpu_region_t</a> regions[<a class="el" href="#ga454a683dd6a4eaf9b26058643e250031">MPU_REGIONS_NUM</a>])</td></tr>
+<tr class="memdesc:gad8290908b2c33ce92fae22535c5c88b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure and enable the Memory Protection Unit (MPU).  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Constants and error codes used for MPU configuration. </p>
-</div></div><!-- contents -->
+<p>Memory Protection Unit (MPU) region configuration utilities for the HSM firmware.</p>
+<dl class="section author"><dt>Author</dt><dd>Marco Lasagna </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>April 2026 </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="gad8290908b2c33ce92fae22535c5c88b0" name="gad8290908b2c33ce92fae22535c5c88b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad8290908b2c33ce92fae22535c5c88b0">&#9670;&#160;</a></span>init_mpu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t init_mpu </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/da9/structmpu__region__t.html">mpu_region_t</a></td>          <td class="paramname"><span class="paramname"><em>regions</em></span>[MPU_REGIONS_NUM]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configure and enable the Memory Protection Unit (MPU). </p>
+<p>This function installs the MPU regions used to isolate privileged kernel memory, unprivileged user memory, flash regions, peripheral access, and the kernel stack guard region.</p>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, or <span class="tt"><a class="el" href="#gaa27628297268fb669450d0e004d5c7d0" title="Null pointer error code.">ENOPOINTER</a></span> if <span class="tt">regions</span> is NULL.</dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>The MPU is enabled with the memory layout required by the HSM privilege-separation model. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The configured regions restrict unprivileged access to privileged kernel memory and protect the kernel stack with a dedicated no-access guard region. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This function assumes Cortex-M0+ MPU with DREGION=8; re-validate MPU_TYPE.DREGION when writing MPU protections for a different ARM MCU. </dd></dl>
+
+</div>
+</div>
+<a id="ga550cf7e73ae1ae8c1c22847c28ed8b9c" name="ga550cf7e73ae1ae8c1c22847c28ed8b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga550cf7e73ae1ae8c1c22847c28ed8b9c">&#9670;&#160;</a></span>set_mpu_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_mpu_region </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/da9/structmpu__region__t.html">mpu_region_t</a></td>          <td class="paramname"><span class="paramname"><em>region</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the MPU region with the specified configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">region</td><td>The MPU region configuration to apply.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function assumes the region parameters are all valid and does not perform any checks. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

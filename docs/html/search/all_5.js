@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['image_5ft_0',['image_t',['../db/da9/structimage__t.html',1,'']]]
+  ['image_5ft_0',['image_t',['../db/da9/structimage__t.html',1,'']]],
+  ['init_5fmpu_1',['init_mpu',['../d2/d4f/group__MPU.html#gad8290908b2c33ce92fae22535c5c88b0',1,'mpu.h']]]
 ];
