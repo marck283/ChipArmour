@@ -4,71 +4,76 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ MPU\_REGIONS\_NUM\ 8}}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ ENOPOINTER\ -\/1}}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ SUCCESS\ 0}}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}ti\_msp\_dl\_config.h"{}}}
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}armv7m\_mpu.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ MPU\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ MPU\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ MPU\_REGIONS\_NUM\ 8}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ ENOPOINTER\ -\/1}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SUCCESS\ 0}}
+\DoxyCodeLine{00027\ }
 \DoxyCodeLine{00029\ }
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00042\ \ \ \ \ NORMAL\ =\ 0,}
-\DoxyCodeLine{00043\ \ \ \ \ DEVICE\ =\ 1,}
-\DoxyCodeLine{00044\ \ \ \ \ ORDERED\ =\ 2}
-\DoxyCodeLine{00045\ \}\ mpu\_access\_t;}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00053\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ region\_num;\ \textcolor{comment}{//\ Region\ number\ (1-\/7)}}
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ uintptr\_t\ base\_addr;\ \textcolor{comment}{//\ Region\ base\ address}}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{const}\ mpu\_access\_t\ access\_type;\ \textcolor{comment}{//\ MPU\ access\ type}}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ ap;\ \textcolor{comment}{//\ Access\ permissions}}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ region\_size;\ \textcolor{comment}{//\ Region\ size}}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ disable\_exec;\ \textcolor{comment}{//\ Disable\ instruction\ execution\ (NX\ bit)}}
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ outer\_cp;\ \textcolor{comment}{//\ Outer\ cache\ policy}}
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ inner\_cp;\ \textcolor{comment}{//\ Inner\ cache\ policy}}
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shareable;\ \textcolor{comment}{//\ Shareable\ attribute}}
-\DoxyCodeLine{00063\ \}\ \doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}};}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00072\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ set\_mpu\_region(\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ region)\ \{}
-\DoxyCodeLine{00073\ \ \ \ \ uint32\_t\ rasr\_attr;}
-\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{switch}\ (region.access\_type)\ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ DEVICE:\ \{}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_DEVICE(region.shareable);}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ORDERED:\ \{}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_ORDERED;}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NORMAL:}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_NORMAL(region.outer\_cp,\ region.inner\_cp,\ region.shareable);}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00088\ \ \ \ \ \}}
-\DoxyCodeLine{00089\ \ \ \ \ }
-\DoxyCodeLine{00090\ \ \ \ \ ARM\_MPU\_SetRegion(}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ ARM\_MPU\_RBAR(region.region\_num,\ region.base\_addr),}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ ARM\_MPU\_RASR\_EX(region.disable\_exec,\ region.ap,\ rasr\_attr,\ 0b00000000,}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ region.region\_size));}
-\DoxyCodeLine{00094\ \}}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00116\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ init\_mpu(\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ regions[\doxymbox{\hyperlink{group__MPU_ga454a683dd6a4eaf9b26058643e250031}{MPU\_REGIONS\_NUM}}])\ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{if}\ (regions\ ==\ NULL)\ \{}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MPU_gaa27628297268fb669450d0e004d5c7d0}{ENOPOINTER}};\ \textcolor{comment}{//\ Handle\ null\ pointer\ input\ gracefully,\ though\ this\ should\ not\ happen\ in\ practice}}
-\DoxyCodeLine{00119\ \ \ \ \ \}}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{for}(uint8\_t\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{group__MPU_ga454a683dd6a4eaf9b26058643e250031}{MPU\_REGIONS\_NUM}};\ i++)\ \{}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ set\_mpu\_region(regions[i]);\ \textcolor{comment}{//\ This\ is\ an\ observable\ side-\/effect,\ so\ the\ compiler\ cannot\ optimize\ this\ for\ loop\ away}}
-\DoxyCodeLine{00123\ \ \ \ \ \}}
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00125\ \ \ \ \ ARM\_MPU\_Enable(MPU\_CTRL\_PRIVDEFENA\_Msk);}
-\DoxyCodeLine{00126\ }
-\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MPU_gaa90cac659d18e8ef6294c7ae337f6b58}{SUCCESS}};\ \textcolor{comment}{//\ Return\ success}}
-\DoxyCodeLine{00128\ \}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}ti\_msp\_dl\_config.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}armv7m\_mpu.h"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ NORMAL\ =\ 0,}
+\DoxyCodeLine{00046\ \ \ \ \ DEVICE\ =\ 1,}
+\DoxyCodeLine{00047\ \ \ \ \ ORDERED\ =\ 2}
+\DoxyCodeLine{00048\ \}\ mpu\_access\_t;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ region\_num;\ \textcolor{comment}{//\ Region\ number\ (1-\/7)}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{const}\ uintptr\_t\ base\_addr;\ \textcolor{comment}{//\ Region\ base\ address}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ mpu\_access\_t\ access\_type;\ \textcolor{comment}{//\ MPU\ access\ type}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ ap;\ \textcolor{comment}{//\ Access\ permissions}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ region\_size;\ \textcolor{comment}{//\ Region\ size}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ disable\_exec;\ \textcolor{comment}{//\ Disable\ instruction\ execution\ (NX\ bit)}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ outer\_cp;\ \textcolor{comment}{//\ Outer\ cache\ policy}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ inner\_cp;\ \textcolor{comment}{//\ Inner\ cache\ policy}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shareable;\ \textcolor{comment}{//\ Shareable\ attribute}}
+\DoxyCodeLine{00066\ \}\ \doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ set\_mpu\_region(\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ region)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ uint32\_t\ rasr\_attr;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{switch}\ (region.access\_type)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ DEVICE:\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_DEVICE(region.shareable);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ORDERED:\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_ORDERED;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NORMAL:}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_NORMAL(region.outer\_cp,\ region.inner\_cp,\ region.shareable);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ ARM\_MPU\_SetRegion(}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ ARM\_MPU\_RBAR(region.region\_num,\ region.base\_addr),}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ ARM\_MPU\_RASR\_EX(region.disable\_exec,\ region.ap,\ rasr\_attr,\ 0b00000000,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ region.region\_size));}
+\DoxyCodeLine{00097\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ init\_mpu(\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ regions[\doxymbox{\hyperlink{group__MPU_ga454a683dd6a4eaf9b26058643e250031}{MPU\_REGIONS\_NUM}}])\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{if}\ (regions\ ==\ NULL)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MPU_gaa27628297268fb669450d0e004d5c7d0}{ENOPOINTER}};\ \textcolor{comment}{//\ Handle\ null\ pointer\ input\ gracefully,\ though\ this\ should\ not\ happen\ in\ practice}}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{for}(uint8\_t\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{group__MPU_ga454a683dd6a4eaf9b26058643e250031}{MPU\_REGIONS\_NUM}};\ i++)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ set\_mpu\_region(regions[i]);\ \textcolor{comment}{//\ This\ is\ an\ observable\ side-\/effect,\ so\ the\ compiler\ cannot\ optimize\ this\ for\ loop\ away}}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ ARM\_MPU\_Enable(MPU\_CTRL\_PRIVDEFENA\_Msk);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MPU_gaa90cac659d18e8ef6294c7ae337f6b58}{SUCCESS}};\ \textcolor{comment}{//\ Return\ success}}
+\DoxyCodeLine{00131\ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MPU\_H}}
 
 \end{DoxyCode}

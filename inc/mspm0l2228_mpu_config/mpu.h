@@ -1,8 +1,11 @@
 /**
- * @defgroup MPU defines
+ * @defgroup MPU MPU defines
  * @brief Constants and error codes used for MPU configuration.
  * @{
  */
+
+#ifndef MPU_H
+#define MPU_H
 
 /**
  * @def MPU_REGIONS_NUM
@@ -126,3 +129,5 @@ static inline uint8_t init_mpu(mpu_region_t regions[MPU_REGIONS_NUM]) {
 
     return SUCCESS; // Return success
 }
+
+#endif // MPU_H
