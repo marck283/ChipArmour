@@ -1,6 +1,28 @@
+/**
+ * @defgroup MPU defines
+ * @brief Constants and error codes used for MPU configuration.
+ * @{
+ */
+
+/**
+ * @def MPU_REGIONS_NUM
+ * @brief Number of MPU regions.
+ */
 #define MPU_REGIONS_NUM 8
+
+/**
+ * @def ENOPOINTER
+ * @brief Null pointer error code.
+ */
 #define ENOPOINTER -1
+
+/**
+ * @def SUCCESS
+ * @brief Success code.
+ */
 #define SUCCESS 0
+
+/** @} */
 
 #include "ti_msp_dl_config.h"
 #include "armv7m_mpu.h"
