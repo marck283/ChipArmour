@@ -1,0 +1,234 @@
+\doxysection{chiparmour.\+h}
+\hypertarget{chiparmour_8h_source}{}\label{chiparmour_8h_source}\index{inc/chiparmour.h@{inc/chiparmour.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{This\ file\ is\ part\ of\ ChipArmour™,\ by\ NewAE\ Technology\ Inc.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{}}
+\DoxyCodeLine{00004\ \textcolor{comment}{ChipArmour™\ is\ Copyright\ 2019\ NewAE\ Technology\ Inc.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{}}
+\DoxyCodeLine{00006\ \textcolor{comment}{ChipArmour™\ is\ a\ trademark\ of\ NewAE\ Technology\ Inc.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{}}
+\DoxyCodeLine{00008\ \textcolor{comment}{Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ "{}License"{});}}
+\DoxyCodeLine{00009\ \textcolor{comment}{you\ may\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{You\ may\ obtain\ a\ copy\ of\ the\ License\ at:}}
+\DoxyCodeLine{00011\ \textcolor{comment}{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00015\ \textcolor{comment}{distributed\ under\ the\ License\ is\ distributed\ on\ an\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{00016\ \textcolor{comment}{WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00018\ \textcolor{comment}{limitations\ under\ the\ License.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{}}
+\DoxyCodeLine{00020\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifndef\ CHIPARMOUR\_H}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ CHIPARMOUR\_H}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{static}\ uint32\_t\ \_ca\_panicflag\ =\ 0;}
+\DoxyCodeLine{00027\ \textcolor{keyword}{static}\ uint32\_t\ \_ca\_sram\_FEED7431\ =\ 0xFEED7431;}
+\DoxyCodeLine{00028\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\_t\ \_ca\_flash\_55A88519\ =\ 0x55A88519;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{int}\ ca\_fullpanic(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{while}(1);}
+\DoxyCodeLine{00032\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{//\#define\ ca\_panic()\ \{\_ca\_panicflag++;\ \_ca\_panic();\}}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ ca\_panic()\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \_ca\_panicflag++;\ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ ca\_fullpanic();\ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ \_\_cmp\_and\_panic(x,\ y,\ op)\ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ if\ ((x)\ op\ (y))\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ ca\_panic();\ \(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\}\ while(0)}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ ca\_landmine()\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_sram\_FEED7431,\ 0xFEED7431,\ !=);\ \(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_flash\_55A88519,\ 0x55A88519,\ !=);\ \(\backslash\)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_sram\_FEED7431,\ \_ca\_flash\_55A88519,\ ==);\ \(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ Typedefs}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{typedef}\ void\ (*ca\_fptr\_voidptr\_t)(\textcolor{keywordtype}{void}\ *\ func\_argument);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{typedef}\ void\ (*ca\_fptr\_voidptr\_array\_t)(\textcolor{keywordtype}{void}\ *\ func\_argument,\ uint8\_t\ *\ value\_array);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{typedef}\ int32\_t\ (*ca\_fptr\_gethash\_t)(\textcolor{keywordtype}{void}\ *\ image,\ uint8\_t\ *\ hash,\ uint32\_t\ len);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00095\ \ \ \ \ uint32\_t\ value;}
+\DoxyCodeLine{00096\ \ \ \ \ uint32\_t\ invvalue;}
+\DoxyCodeLine{00097\ \}\ \doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00104\ \ \ \ \ uint16\_t\ value;}
+\DoxyCodeLine{00105\ \ \ \ \ uint16\_t\ invvalue;}
+\DoxyCodeLine{00106\ \}\ \doxymbox{\hyperlink{structca__uint16__t}{ca\_uint16\_t}};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00113\ \ \ \ \ uint8\_t\ value;}
+\DoxyCodeLine{00114\ \ \ \ \ uint8\_t\ invvalue;}
+\DoxyCodeLine{00115\ \}\ \doxymbox{\hyperlink{structca__uint8__t}{ca\_uint8\_t}};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00118\ \ \ \ \ ca\_fptr\_voidptr\_t\ value;}
+\DoxyCodeLine{00119\ \ \ \ \ ca\_fptr\_voidptr\_t\ invvalue;}
+\DoxyCodeLine{00120\ \}\ \doxymbox{\hyperlink{structca__funcpointer__t}{ca\_funcpointer\_t}};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00125\ \textcolor{keyword}{enum}\ ca\_return\_t\ \{\ }
+\DoxyCodeLine{00126\ \ \ \ \ CA\_SUCCESS\ =\ 0x5ABF0938,}
+\DoxyCodeLine{00127\ \ \ \ \ CA\_FAIL\ \ \ \ =\ 0x2820F02A,}
+\DoxyCodeLine{00128\ \ \ \ \ CA\_BADARG\ \ =\ 0x328A9201,}
+\DoxyCodeLine{00129\ \ \ \ \ CA\_MEMERR\ \ =\ 0x480ABFE1,}
+\DoxyCodeLine{00130\ \};}
+\DoxyCodeLine{00131\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ ca\_return\_t\ ca\_return\_t;}
+\DoxyCodeLine{00132\ \textcolor{comment}{//Sidenote:\ To\ work\ as\ enum,\ restricted\ to\ positive\ values\ only\ (make\ sure\ top}}
+\DoxyCodeLine{00133\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ bit\ is\ clear).}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ User\ call-\/back\ functions\ you\ may\ define\ (overrides\ weak\ defaults).}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00138\ \ }
+\DoxyCodeLine{00142\ \textcolor{keywordtype}{void}\ causer\_panic(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ HAL\ functions\ required\ to\ be\ defined\ on\ your\ platform.}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{keywordtype}{void}\ ca\_hal\_mpu\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ ROP\ prevention\ assistance\ functions.}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#define\ CA\_ROP\_SET\_MAX\_RETURNS(functionname,\ maxreturns)\ \(\backslash\)}}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\ \ \ \ enum\ \{\ ca\_functionname\_max\_returns\ =\ (maxreturns)\ \};}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#define\ CA\_ROP\_RETURNADDRS\_ARRAY(functionname)\ \(\backslash\)}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\ \ \ \ static\ void\ *\ ca\_functionname\_valid\_returnaddrs[ca\_functionname\_max\_returns];}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ CA\_ROP\_CHECK\_VALID\_RETURN(functionname)\ \(\backslash\)}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\ \ \ \ }\textcolor{comment}{/*\ Validate\ we\ are\ returning\ to\ a\ valid\ call\ location\ */}\textcolor{preprocessor}{\ \(\backslash\)}}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\ \ \ \ void\ *\ ca\_ra\ =\ \_\_builtin\_extract\_return\_addr(\_\_builtin\_return\_address(0));\ \(\backslash\)}}
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\ \ \ \ uint32\_t\ ca\_loopindx;\ \(\backslash\)}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\ \ \ \ for(ca\_loopindx\ =\ 0;\ ca\_loopindx\ <\ len(ca\_functionname\_valid\_returnaddrs);\ ca\_loopindx++)\{\ \(\backslash\)}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ The\ zero\ flag\ indicates\ end\ of\ array\ reached,\ shouldn't\ happen\ */}\textcolor{preprocessor}{\ \(\backslash\)}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_\_cmp\_and\_panic(ca\_functionname\_valid\_returnaddrs[ca\_loopindx],\ 0,\ ==);\ \(\backslash\)}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (ca\_functionname\_valid\_returnaddrs[ca\_loopindx]\ ==\ ca\_ra)\{\ \(\backslash\)}}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ break;\ \(\backslash\)}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(ca\_loopindx,\ len(ca\_functionname\_valid\_returnaddrs),\ >=);\ \(\backslash\)}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\ \}\ while(0)}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ Memory\ space\ armouring\ macros\ /\ function.}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\#define\ CA\_ATTR\_SECURE1\ \_\_attribute\_\_((section("{}ca\_secure1"{})))}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00187\ \textcolor{keywordtype}{void}\ ca\_lock\_secure1(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00192\ \textcolor{keywordtype}{void}\ ca\_unlock\_secure1(uint32\_t\ unlock\_key);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{preprocessor}{\#ifndef\ MAX\_SECURE1\_RETURN\_LOCS}}
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#define\ MAX\_SECURE1\_RETURN\_LOCS\ 10}}
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00201\ \textcolor{comment}{\ System\ functions/macros}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00209\ \textcolor{keywordtype}{void}\ ca\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ Testing\ functions\ (may\ want\ to\ disable\ in\ production\ build).}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00224\ \textcolor{keywordtype}{void}\ ca\_test\_mpu(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00233\ \textcolor{keywordtype}{void}\ ca\_test\_panic(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00236\ \textcolor{comment}{State\ machine\ validation}}
+\DoxyCodeLine{00237\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#define\ CA\_STATE\_INIT\ -\/2944}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00246\ \textcolor{keywordtype}{void}\ ca\_state\_machine(\textcolor{keywordtype}{int}\ statenum);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00250\ \textcolor{comment}{\ Data\ processing\ functions/macros}}
+\DoxyCodeLine{00251\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ ca\_return\_t\ \_ca\_compare\_u32\_eq(\doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ op1,}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ op2,}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_fptr\_voidptr\_t\ equal\_function,}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ equal\_func\_param,}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_fptr\_voidptr\_t\ unequal\_function,}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ unequal\_func\_param);}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00260\ uint32\_t\ \_ca\_limit\_u32(\doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ input,\ \doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ min,\ \doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ max);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00266\ \doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ ca\_ret\_u32(uint32\_t\ value);}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00272\ \doxymbox{\hyperlink{structca__uint32__t}{ca\_uint32\_t}}\ ca\_retfast\_u32(uint32\_t\ value);}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00278\ \doxymbox{\hyperlink{structca__uint16__t}{ca\_uint16\_t}}\ ca\_ret\_u16(uint16\_t\ value);}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00284\ \doxymbox{\hyperlink{structca__uint8__t}{ca\_uint8\_t}}\ ca\_ret\_u8(uint8\_t\ value);}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00290\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ ca\_limit\_u32(uint32\_t\ input,\ uint32\_t\ min,\ uint32\_t\ max)}
+\DoxyCodeLine{00291\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordflow}{return}\ \_ca\_limit\_u32(ca\_retfast\_u32(input),\ ca\_retfast\_u32(min),\ ca\_retfast\_u32(max));}
+\DoxyCodeLine{00293\ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ ca\_return\_t\ ca\_compare\_u32\_eq(\ uint32\_t\ op1,\ }
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ op2,}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_fptr\_voidptr\_t\ equal\_function,}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ equal\_func\_param,}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_fptr\_voidptr\_t\ unequal\_function,}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ unequal\_func\_param)}
+\DoxyCodeLine{00315\ \ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordflow}{return}\ \_ca\_compare\_u32\_eq(ca\_retfast\_u32(op1),}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_retfast\_u32(op2),}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ equal\_function,}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ equal\_func\_param,}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unequal\_function,}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unequal\_func\_param);}
+\DoxyCodeLine{00322\ \ \}}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ \textcolor{comment}{/**************************************************************************}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ Signature\ verification\ functions\ /\ macros}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ **************************************************************************/}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00333\ ca\_return\_t\ ca\_compare\_func\_eq(\ ca\_fptr\_voidptr\_array\_t\ \ \ \ get\_value\_func,}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ get\_value\_func\_param,}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ get\_value\_func\_return,}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expected\_value\_array,}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expected\_value\_len,}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_fptr\_voidptr\_t\ \ \ \ \ \ \ \ \ \ \ equal\_function,}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ equal\_func\_param,}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ca\_fptr\_voidptr\_t\ \ \ \ \ \ \ \ \ \ unequal\_function,}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unequal\_func\_param);}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

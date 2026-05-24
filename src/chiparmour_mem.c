@@ -47,14 +47,14 @@ void ca_unlock_secure1(uint32_t unlock_key)
     
     while(1)
     {
-        if (unlock_key == CA_SECURE1_UNLOCK_KEY){
+        if (unlock_key == CA_SECURE1_UNLOCK_KEY) {
             matchcnt++;            
         } else {
             ca_panic();
         }
         
         if (matchcnt == 3){
-            if (unlock_key == CA_SECURE1_UNLOCK_KEY){
+            if (unlock_key == CA_SECURE1_UNLOCK_KEY) {
                 ca_hal_unlock();
                 return;
             } else {

@@ -1,0 +1,152 @@
+\doxysection{ti\+\_\+msp\+\_\+dl\+\_\+config.\+h}
+\hypertarget{ti__msp__dl__config_8h_source}{}\label{ti__msp__dl__config_8h_source}\index{inc/mspm0l2228\_mpu\_config/ti\_msp\_dl\_config.h@{inc/mspm0l2228\_mpu\_config/ti\_msp\_dl\_config.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2023,\ Texas\ Instruments\ Incorporated\ -\/\ http://www.ti.com}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ modification,\ are\ permitted\ provided\ that\ the\ following\ conditions}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ are\ met:}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ *\ \ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ \ \ \ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ *\ \ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ \ \ \ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ \ \ \ documentation\ and/or\ other\ materials\ provided\ with\ the\ distribution.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ *\ \ Neither\ the\ name\ of\ Texas\ Instruments\ Incorporated\ nor\ the\ names\ of}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ \ \ \ its\ contributors\ may\ be\ used\ to\ endorse\ or\ promote\ products\ derived}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ \ \ \ from\ this\ software\ without\ specific\ prior\ written\ permission.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS\ "{}AS\ IS"{}}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT\ LIMITED\ TO,}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR\ A\ PARTICULAR}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ PURPOSE\ ARE\ DISCLAIMED.\ IN\ NO\ EVENT\ SHALL\ THE\ COPYRIGHT\ OWNER\ OR}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,\ SPECIAL,}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT\ LIMITED\ TO,}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,\ DATA,\ OR\ PROFITS;}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY\ THEORY\ OF\ LIABILITY,}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT\ (INCLUDING\ NEGLIGENCE\ OR}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ *\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE\ OF\ THIS\ SOFTWARE,}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ *\ \ ============\ ti\_msp\_dl\_config.h\ =============}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ *\ \ Configured\ MSPM0\ DriverLib\ module\ declarations}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ *\ \ DO\ NOT\ EDIT\ -\/\ This\ file\ is\ generated\ for\ the\ MSPM0L222X}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ *\ \ by\ the\ SysConfig\ tool.}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#ifndef\ ti\_msp\_dl\_config\_h}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ ti\_msp\_dl\_config\_h}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ CONFIG\_MSPM0L222X}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ CONFIG\_MSPM0L2228}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#if\ defined(\_\_ti\_version\_\_)\ ||\ defined(\_\_TI\_COMPILER\_VERSION\_\_)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ SYSCONFIG\_WEAK\ \_\_attribute\_\_((weak))}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ SYSCONFIG\_WEAK\ \_\_weak}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ SYSCONFIG\_WEAK\ \_\_attribute\_\_((weak))}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#include\ <ti/devices/msp/msp.h>}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#include\ <ti/driverlib/driverlib.h>}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#include\ <ti/driverlib/m0p/dl\_core.h>}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00059\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ *\ \ ========\ SYSCFG\_DL\_init\ ========}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ *\ \ Perform\ all\ required\ MSP\ DL\ initialization}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ *\ \ This\ function\ should\ be\ called\ once\ at\ a\ point\ before\ any\ use\ of}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ *\ \ MSP\ DL.}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ POWER\_STARTUP\_DELAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16)}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ CPUCLK\_FREQ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 32000000}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{comment}{/*\ Defines\ for\ UART\_0\ */}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ UART\_0\_INST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UART0}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ UART\_0\_INST\_FREQUENCY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 32000000}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ UART\_0\_INST\_IRQHandler\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UART0\_IRQHandler}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ UART\_0\_INST\_INT\_IRQN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UART0\_INT\_IRQn}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_RX\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIOA}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_TX\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIOA}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_RX\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DL\_GPIO\_PIN\_11}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_TX\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DL\_GPIO\_PIN\_10}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_IOMUX\_RX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (IOMUX\_PINCM26)}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_IOMUX\_TX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (IOMUX\_PINCM25)}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_IOMUX\_RX\_FUNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IOMUX\_PINCM26\_PF\_UART0\_RX}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_0\_IOMUX\_TX\_FUNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IOMUX\_PINCM25\_PF\_UART0\_TX}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ UART\_0\_BAUD\_RATE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (115200)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ UART\_0\_IBRD\_32\_MHZ\_115200\_BAUD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (17)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ UART\_0\_FBRD\_32\_MHZ\_115200\_BAUD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (23)}}
+\DoxyCodeLine{00096\ \textcolor{comment}{/*\ Defines\ for\ UART\_1\ */}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ UART\_1\_INST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UART1}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ UART\_1\_INST\_FREQUENCY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 32000000}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ UART\_1\_INST\_IRQHandler\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UART1\_IRQHandler}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ UART\_1\_INST\_INT\_IRQN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UART1\_INT\_IRQn}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_RX\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIOA}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_TX\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GPIOA}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_RX\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DL\_GPIO\_PIN\_9}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_TX\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DL\_GPIO\_PIN\_8}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_IOMUX\_RX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (IOMUX\_PINCM20)}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_IOMUX\_TX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (IOMUX\_PINCM19)}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_IOMUX\_RX\_FUNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IOMUX\_PINCM20\_PF\_UART1\_RX}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ GPIO\_UART\_1\_IOMUX\_TX\_FUNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IOMUX\_PINCM19\_PF\_UART1\_TX}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ UART\_1\_BAUD\_RATE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (115200)}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ UART\_1\_IBRD\_32\_MHZ\_115200\_BAUD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (17)}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ UART\_1\_FBRD\_32\_MHZ\_115200\_BAUD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (23)}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{comment}{/*\ Port\ definition\ for\ Pin\ Group\ LEDS\ */}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ LEDS\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (GPIOB)}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{comment}{/*\ Defines\ for\ STATUS\_LED:\ GPIOB.14\ with\ pinCMx\ 35\ on\ package\ pin\ 2\ */}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ LEDS\_STATUS\_LED\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (DL\_GPIO\_PIN\_14)}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ LEDS\_STATUS\_LED\_IOMUX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (IOMUX\_PINCM35)}}
+\DoxyCodeLine{00123\ \textcolor{comment}{/*\ Port\ definition\ for\ Pin\ Group\ BUTTONS\ */}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ BUTTONS\_PORT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (GPIOB)}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{comment}{/*\ Defines\ for\ S2:\ GPIOB.21\ with\ pinCMx\ 63\ on\ package\ pin\ 20\ */}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ BUTTONS\_S2\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (DL\_GPIO\_PIN\_21)}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ BUTTONS\_S2\_IOMUX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (IOMUX\_PINCM63)}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{keywordtype}{void}\ SYSCFG\_DL\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00134\ \textcolor{keywordtype}{void}\ SYSCFG\_DL\_initPower(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00135\ \textcolor{keywordtype}{void}\ SYSCFG\_DL\_GPIO\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00136\ \textcolor{keywordtype}{void}\ SYSCFG\_DL\_SYSCTL\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00137\ \textcolor{keywordtype}{void}\ SYSCFG\_DL\_UART\_0\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00138\ \textcolor{keywordtype}{void}\ SYSCFG\_DL\_UART\_1\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00143\ \}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ti\_msp\_dl\_config\_h\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
