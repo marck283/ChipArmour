@@ -23,6 +23,10 @@ limitations under the License.
 #ifndef CHIPARMOUR_H
 #define CHIPARMOUR_H
 
+static uint32_t _ca_panicflag = 0;
+static uint32_t _ca_sram_FEED7431 = 0xFEED7431;
+static const uint32_t _ca_flash_55A88519 = 0x55A88519;
+
 int _ca_fullpanic(void) {
     while(1);
 }
