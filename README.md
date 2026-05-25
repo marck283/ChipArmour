@@ -49,4 +49,7 @@ ChipArmour started in Canada, where 'armour' is the preferred spelling. It's eas
 
 ### Trademark Disclaimers
 
-ChipArmour and ChipArmor are trademarks of NewAE Technology Inc. ChipWhiserer is a registered trademark of NewAE Technology Inc.
+ChipArmour and ChipArmor are trademarks of NewAE Technology Inc. ChipWhisperer is a registered trademark of NewAE Technology Inc.
+
+## Disclaimer
+This project is a fork of [https://github.com/newaetech/ChipArmour](https://github.com/newaetech/ChipArmour).
