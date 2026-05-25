@@ -1,5 +1,5 @@
 /**
- * @defgroup MPU MPU configuration
+ * @defgroup MSPM0L2228_MPU MPU configuration
  * @brief Constants, error codes, and functions used for MPU configuration.
  * @{
  */
@@ -66,7 +66,7 @@ typedef struct mpu_region_t {
 } mpu_region_t;
 
 /**
- * @ingroup MPU
+ * @ingroup MSPM0L2228_MPU
  * 
  * @brief Set the MPU region with the specified configuration. 
  * 
@@ -99,7 +99,7 @@ static inline void set_mpu_region(mpu_region_t region) {
 }
 
 /**
- * @ingroup MPU
+ * @ingroup MSPM0L2228_MPU
  * 
  * @brief Configure and enable the Memory Protection Unit (MPU).
  *
@@ -119,7 +119,7 @@ static inline void set_mpu_region(mpu_region_t region) {
  */
 static inline uint8_t init_mpu(mpu_region_t regions[MPU_REGIONS_NUM]) {
     if (regions == NULL) {
-        return ENOPOINTER; // Handle null pointer input gracefully, though this should not happen in practice
+        return ENOPOINTER; // Handle NULL pointer input gracefully, though this should not happen in practice
     }
 
     for(uint8_t i = 0; i < MPU_REGIONS_NUM; i++) {

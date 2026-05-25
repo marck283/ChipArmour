@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['configuration_0',['MPU configuration',['../d2/d4f/group__MPU.html',1,'']]]
+  ['configuration_0',['MPU configuration',['../dc/dae/group__MSPM0L2228__MPU.html',1,'']]]
 ];

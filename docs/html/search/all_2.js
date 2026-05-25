@@ -8,6 +8,6 @@ var searchData=
   ['chiparmour™_5',['ChipArmour™',['../d0/d30/md_README.html',1,'']]],
   ['chiparmour_20vs_20chiparmor_6',['ChipArmour vs. ChipArmor',['../d0/d30/md_README.html#autotoc_md8',1,'']]],
   ['code_7',['Use of Binary Libraries vs. Source Code',['../d0/d30/md_README.html#autotoc_md3',1,'']]],
-  ['configuration_8',['MPU configuration',['../d2/d4f/group__MPU.html',1,'']]],
+  ['configuration_8',['MPU configuration',['../dc/dae/group__MSPM0L2228__MPU.html',1,'']]],
   ['contributor_20agreement_9',['Contributor Agreement',['../d0/d30/md_README.html#autotoc_md6',1,'']]]
 ];

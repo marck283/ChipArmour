@@ -157,7 +157,7 @@ __attribute__((naked))
 void Reset_Handler(void)
 {
     __asm(
-        // Jump to TI initialization routine.
+        // Jump to TI initialization routine, then de-privilege execution at startup. DO NOT CHANGE THIS SEQUENCE.
         "    .global _c_int00\n"
         "    b       _c_int00");
 }
@@ -186,7 +186,6 @@ static inline void loop_forever(void) {
  */
 void Default_Handler(void)
 {
-    print_debug("Crashed\n");
     loop_forever();
     while (1)
         ;
