@@ -68,7 +68,7 @@ typedef struct mpu_region_t {
 /**
  * @ingroup MSPM0L2228_MPU
  * 
- * @brief Set the MPU region with the specified configuration. 
+ * @brief Set the MPU region to the given configuration. 
  * 
  * @param region The MPU region configuration to apply.
  * 
