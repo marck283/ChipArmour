@@ -1,0 +1,44 @@
+\doxysection{panic.\+h}
+\hypertarget{panic_8h_source}{}\label{panic_8h_source}\index{inc/panic.h@{inc/panic.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PANIC\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PANIC\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ FEED7431\ 0xFEED7431}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ FLASH\_55A88519\ 0x55A88519}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{static}\ uint32\_t\ \_ca\_panicflag\ =\ 0;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{static}\ uint32\_t\ \_ca\_sram\_FEED7431\ =\ FEED7431;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\_t\ \_ca\_flash\_55A88519\ =\ FLASH\_55A88519;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__panic_ga6ae3544bc447ad5769019b728c8d794a}{\_ca\_fullpanic}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ ca\_panic()\ \(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \_ca\_panicflag++;\ \(\backslash\)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \_ca\_fullpanic();\ \(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\}\ while(0)}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ \_\_cmp\_and\_panic(x,\ y,\ op)\ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ if\ ((x)\ op\ (y))\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ ca\_panic();\ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\}\ while(0)}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ ca\_landmine()\ \(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_sram\_FEED7431,\ FEED7431,\ !=);\ \(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_flash\_55A88519,\ FLASH\_55A88519,\ !=);\ \(\backslash\)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_sram\_FEED7431,\ \_ca\_flash\_55A88519,\ ==);\ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\}\ while(0)}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ ca\_true()\ \ (\_ca\_sram\_FEED7431\ ==\ FEED7431)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ ca\_false()\ (\_ca\_sram\_FEED7431\ ==\ 0xFE000000)}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

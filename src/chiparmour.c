@@ -19,10 +19,8 @@ limitations under the License.
 
 */
 #include "../inc/chiparmour.h"
-
-#define ca_ret_u32(value)  _ca_ret_u32(value, cp_get_magic())
-#define ca_true()  (_ca_sram_FEED7431 == 0xFEED7431)
-#define ca_false() (_ca_sram_FEED7431 == 0xFE000000)
+#include "ca_ret_uint.h"
+#include "panic.h"
 
 int ca_atmine(void)
 {}
@@ -32,64 +30,6 @@ int ca_atwait(void)
 
 int ca_fastwait(void)
 {}
-
-/**
-  Returns an unsigned 32-bit value, but adds armour around the return
-  function to catch fault injection attempts. 
-*/
-ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay)
-{
-    ca_landmine();
-    uint32_t delay = ca_get_delay();
-    uint32_t i = 0;
-    uint32_t local_value;    
-    ca_landmine();
-    
-    __cmp_and_panic(value.invvalue, ~value.value, !=);
-    /*if (value.invvalue != ~value.value){
-        ca_panic();
-    }*/
-    
-    local_value = value.value - delay;
-    
-    __cmp_and_panic(value.invvalue, ~value.value, !=);
-    /*if (value.invvalue != ~value.value){
-        ca_panic();
-    }*/
-    
-    ca_uint32_t invalid_rv;
-    invalid_rv.value = 0;
-    invalid_rv.invvalue = 0;
-    
-    while(ca_true()){
-        i++;
-        local_value++;
-        
-        __cmp_and_panic(i, delay, >);
-        //if (i > delay) { ca_panic(); }
-        
-        ca_landmine();
-        
-        if (i == delay){
-            ca_uint32_t rv;
-            rv.value = local_value;
-            rv.invvalue = ~local_value;
-            return rv;
-        }
-        if (i == delay){return invalid_rv;}
-        
-        ca_landmine();
-        if (i == delay){return invalid_rv;}
-        
-        __cmp_and_panic(i, delay, >);
-        //if (i > delay) { ca_panic(); }
-    }
-    
-    ca_landmine();
-    ca_panic();
-    
-    return invalid_rv;
-}
 
 typedef void (*ca_funcpointer)(void *);
 
@@ -201,7 +141,7 @@ CA_DO_COMPARE:
                 }
                 return CA_SUCCESS;
             } else {
-                ca_fullpanic();
+                ca_panic();
             }
         }
         
@@ -214,14 +154,14 @@ CA_DO_COMPARE:
                 }                
                 return CA_FAIL;
             } else {
-                ca_fullpanic();
+                ca_panic();
             }
         }
 
-        ca_fullpanic();        
+        ca_panic();        
         
     } else {
-        ca_fullpanic();
+        ca_panic();
     }
     
     ca_panic();
@@ -261,7 +201,6 @@ CA_DO_LOOP:
         }
         
         __cmp_and_panic(i, CA_CMP_LOOPS, >);
-        //if (i > CA_CMP_LOOPS){ca_panic();}
         
         ca_landmine();
     }
@@ -327,7 +266,7 @@ CA_DO_COMPARE:
                 }
                 return CA_SUCCESS;
             } else {
-                ca_fullpanic();
+                ca_panic();
             }
         }
         
@@ -340,14 +279,14 @@ CA_DO_COMPARE:
                 }                
                 return CA_FAIL;
             } else {
-                ca_fullpanic();
+                ca_panic();
             }
         }
 
-        ca_fullpanic();        
+        ca_panic();        
         
     } else {
-        ca_fullpanic();
+        ca_panic();
     }
     
     ca_panic();
@@ -415,10 +354,4 @@ void ca_state_machine(int statenum)
     __cmp_and_panic(ca_stored_state, statenum, !=);
     
     return;
-}
-
-ca_uint32_t ca_retfast_u32(uint32_t value)
-{
-    ca_uint32_t ret = {value, ~value};
-    return ret;
 }

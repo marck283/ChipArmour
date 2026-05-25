@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['binary_20libraries_20vs_20source_20code_0',['Use of Binary Libraries vs. Source Code',['../d0/d30/md_README.html#autotoc_md3',1,'']]],
-  ['bounty_1',['Security Disclosure, Bug Bounty',['../d0/d30/md_README.html#autotoc_md7',1,'']]],
-  ['bug_20bounty_2',['Security Disclosure, Bug Bounty',['../d0/d30/md_README.html#autotoc_md7',1,'']]]
+  ['agreement_0',['Contributor Agreement',['../d0/d30/md_README.html#autotoc_md6',1,'']]],
+  ['and_20other_20notes_1',['Legal and Other Notes',['../d0/d30/md_README.html#autotoc_md5',1,'']]],
+  ['and_20templates_2',['Example Projects and Templates',['../d0/d30/md_README.html#autotoc_md1',1,'']]],
+  ['arm_5fmpu_5fregion_5ft_3',['ARM_MPU_Region_t',['../df/d64/structARM__MPU__Region__t.html',1,'']]]
 ];

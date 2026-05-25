@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['enopointer_0',['ENOPOINTER',['../dc/dae/group__MSPM0L2228__MPU.html#gaa27628297268fb669450d0e004d5c7d0',1,'mpu.h']]],
-  ['environment_1',['Validation Environment',['../d0/d30/md_README.html#autotoc_md2',1,'']]],
-  ['example_20projects_20and_20templates_2',['Example Projects and Templates',['../d0/d30/md_README.html#autotoc_md1',1,'']]]
+  ['delay_0',['delay',['../d6/d4b/structca__ret__u32__state__t.html#ad90055bda881aa631303a16f56793eba',1,'ca_ret_u32_state_t::delay'],['../d5/d33/structca__ret__u16__state__t.html#a182725728c105b90ebba19720164a990',1,'ca_ret_u16_state_t::delay'],['../d1/d4a/structca__ret__u8__state__t.html#a9eb9b033cef5eabfcfbdac377f6dc5e2',1,'ca_ret_u8_state_t::delay']]],
+  ['disclaimers_1',['Trademark Disclaimers',['../d0/d30/md_README.html#autotoc_md9',1,'']]],
+  ['disclosure_20bug_20bounty_2',['Security Disclosure, Bug Bounty',['../d0/d30/md_README.html#autotoc_md7',1,'']]]
 ];

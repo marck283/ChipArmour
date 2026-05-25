@@ -23,36 +23,6 @@ limitations under the License.
 #ifndef CHIPARMOUR_H
 #define CHIPARMOUR_H
 
-static uint32_t _ca_panicflag = 0;
-static uint32_t _ca_sram_FEED7431 = 0xFEED7431;
-static const uint32_t _ca_flash_55A88519 = 0x55A88519;
-
-int _ca_fullpanic(void) {
-    while(1);
-}
-
-#define ca_panic() \
-do { \
-    _ca_panicflag++; \
-    _ca_fullpanic(); \
-} while(0)
-
-#define __cmp_and_panic(x, y, op) \
-do { \
-    if ((x) op (y)) { \
-        ca_panic(); \
-    } \
-} while(0)
-
-/** 
-  Jumps to the panic function if one of two comparisons fail.
-  */
-#define ca_landmine() { \
-    __cmp_and_panic(_ca_sram_FEED7431, 0xFEED7431, !=); \
-    __cmp_and_panic(_ca_flash_55A88519, 0x55A88519, !=); \
-    __cmp_and_panic(_ca_sram_FEED7431, _ca_flash_55A88519, ==); \
-}
-
 /***************************************************************************
  Typedefs
  ***************************************************************************/
@@ -85,34 +55,6 @@ typedef void (*ca_fptr_voidptr_array_t)(void * func_argument, uint8_t * value_ar
        return value  : Actual length of hash written to buffer, or -1 for fail.
 */
 typedef int32_t (*ca_fptr_gethash_t)(void * image, uint8_t * hash, uint32_t len);
-
-
-/**
-    uint32_t returned by ca_ret_N functions, must be passed to comparison
-     functions.
-*/
-typedef struct {
-    uint32_t value;
-    uint32_t invvalue;
-} ca_uint32_t;
-
-/**
-    uint16_t returned by ca_ret_N functions, must be passed to comparison
-     functions.
-*/
-typedef struct {
-    uint16_t value;
-    uint16_t invvalue;
-} ca_uint16_t;
-
-/**
-    uint8_t returned by ca_ret_N functions, must be passed to comparison
-     functions.
-*/
-typedef struct {
-    uint8_t value;
-    uint8_t invvalue;
-} ca_uint8_t;
 
 typedef struct {
     ca_fptr_voidptr_t value;
@@ -258,30 +200,6 @@ ca_return_t _ca_compare_u32_eq(ca_uint32_t op1,
                   void * unequal_func_param);
                   
 uint32_t _ca_limit_u32(ca_uint32_t input, ca_uint32_t min, ca_uint32_t max);
-
-/**
-    Returns a 32-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
-*/
-ca_uint32_t ca_ret_u32(uint32_t value);
-
-/**
-    Returns a 32-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
-*/
-ca_uint32_t ca_retfast_u32(uint32_t value);
-
-/**
-    Returns a 16-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
-*/
-ca_uint16_t ca_ret_u16(uint16_t value);
-
-/**
-    Returns a 8-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
-*/
-ca_uint8_t ca_ret_u8(uint8_t value);
 
 /**
     Take an input value and ensure it falls within the given limits, by 
