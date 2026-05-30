@@ -6,10 +6,10 @@
 #include "random.h"
 
 #define ca_get_delay(maxdelay) _Generic((maxdelay), \
-    uint64_t: (RANDOM_UINT(64, (maxdelay), 8)) % UINT64_MAX, \
-    uint32_t: (RANDOM_UINT(32, (maxdelay), 4)) % UINT32_MAX, \
-    uint16_t: (RANDOM_UINT(16, (maxdelay), 2)) % UINT16_MAX, \
-    uint8_t: (RANDOM_UINT(8, (maxdelay), 1)) % UINT8_MAX, \
+    uint64_t: (RANDOM_UINT(64, (maxdelay))) % UINT64_MAX, \
+    uint32_t: (RANDOM_UINT(32, (maxdelay))) % UINT32_MAX, \
+    uint16_t: (RANDOM_UINT(16, (maxdelay))) % UINT16_MAX, \
+    uint8_t: (RANDOM_UINT(8, (maxdelay))) % UINT8_MAX, \
     default: 0 \
 )
 

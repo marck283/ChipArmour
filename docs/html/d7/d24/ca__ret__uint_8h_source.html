@@ -126,10 +126,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d7/d24/ca__ret
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;random.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define ca_get_delay(maxdelay) _Generic((maxdelay), \</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">    uint64_t: (RANDOM_UINT(64, (maxdelay), 8)) % UINT64_MAX, \</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">    uint32_t: (RANDOM_UINT(32, (maxdelay), 4)) % UINT32_MAX, \</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">    uint16_t: (RANDOM_UINT(16, (maxdelay), 2)) % UINT16_MAX, \</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">    uint8_t: (RANDOM_UINT(8, (maxdelay), 1)) % UINT8_MAX, \</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">    uint64_t: (RANDOM_UINT(64, (maxdelay))) % UINT64_MAX, \</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">    uint32_t: (RANDOM_UINT(32, (maxdelay))) % UINT32_MAX, \</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">    uint16_t: (RANDOM_UINT(16, (maxdelay))) % UINT16_MAX, \</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">    uint8_t: (RANDOM_UINT(8, (maxdelay))) % UINT8_MAX, \</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">    default: 0 \</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">)</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>

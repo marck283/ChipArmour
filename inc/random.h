@@ -8,15 +8,11 @@
 
 #define UINT_TYPE(bitsize) uint##bitsize##_t
 
-#define RANDOM_UINT(bitsize, upper_bound, maxLength) \
+#define RANDOM_UINT(bitsize, upper_bound) \
     do { \
-        UINT_TYPE(bitsize) buf[maxLength]; \
-        if (random((uint8_t *)buf, sizeof(buf) / sizeof(buf[0]), (uint8_t)((upper_bound) - 1)) != RET_OK) { \
-            return 0; \
-        } \
-        UINT_TYPE(bitsize) result = 0; \
-        for (UINT_TYPE(bitsize) i = 0; i < maxLength; i++) { \
-            result |= ((UINT_TYPE(bitsize))buf[i]) << (i * 8); \
+        UINT_TYPE(bitsize) result = RET_ERR; \
+        if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) { \
+            return -1; \
         } \
         return result; \
     } while(0)
