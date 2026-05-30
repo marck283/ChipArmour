@@ -40,10 +40,5 @@ ret_t random(uint8_t * buf, uint32_t len, uint8_t upper_bound) {
     ASSERT(READ_U32(&random_state.ctr) == READ_U32(&current_ctr) +
            READ_U32(&blocks_needed), "Random error", RET_ERR);
 
-    uint16_t bound = (uint16_t)upper_bound + 1U;
-    for (uint32_t i = 0; i < len; i++) {
-        buf[i] %= bound;
-    }
-
     return RET_OK;
 }

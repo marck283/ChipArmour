@@ -31,17 +31,17 @@
 )
 
 #define CA_RETFAST_INIT(bitsize, val) \
-    (struct CA_UINT_TYPE(bitsize)) { \
+    (CA_UINT_TYPE(bitsize)) { \
         .value = (val), \
         .invvalue = (~(val)) \
     }
 
-#define SET_STATE_LOCAL_VALUE(state, value) \
+#define SET_STATE_LOCAL_VALUE(bitsize, state, value) \
     do { \
         ca_landmine(); \
-        __cmp_and_panic((value).invvalue, ~(value).value, !=); \
+        __cmp_and_panic((value).invvalue, (uint_##bitsize##_t) (~(value).value), !=); \
         state.local_value = (value).value - state.delay; \
-        __cmp_and_panic((value).invvalue, ~(value).value, !=); \
+        __cmp_and_panic((value).invvalue, (uint_##bitsize##_t) (~(value).value), !=); \
     } while (0)
 
 #define STATE_INCREMENT_AND_CHECK(state) \
@@ -63,7 +63,7 @@
     do { \
         ca_landmine(); \
         CA_RET_STATE_TYPE(bitsize) state = CA_RET_UINT_STATE(value.value, maxdelay); \
-        SET_STATE_LOCAL_VALUE(state, value); \
+        SET_STATE_LOCAL_VALUE(bitsize, state, value); \
         CA_UINT_TYPE(bitsize) invalid_rv = {0}; \
         while (ca_comp(_ca_sram_FEED7431, FEED7431, ==)) { \
             STATE_INCREMENT_AND_CHECK(state); \
@@ -88,7 +88,7 @@
  * @brief uint64_t returned by ca_ret_N functions, must be passed to comparison
  * functions.
 */
-typedef struct ca_uint64_t {
+typedef struct {
     uint64_t value; //!< The actual value
     uint64_t invvalue; //!< The bitwise inverse of the value, used for integrity checks to detect fault injection attempts
 } ca_uint64_t;
@@ -97,7 +97,7 @@ typedef struct ca_uint64_t {
  * @brief uint32_t returned by ca_ret_N functions, must be passed to comparison
  * functions.
 */
-typedef struct ca_uint32_t {
+typedef struct {
     uint32_t value; //!< The actual value
     uint32_t invvalue; //!< The bitwise inverse of the value, used for integrity checks to detect fault injection attempts
 } ca_uint32_t;
@@ -106,7 +106,7 @@ typedef struct ca_uint32_t {
  * @brief uint16_t returned by ca_ret_N functions, must be passed to comparison
  * functions.
 */
-typedef struct ca_uint16_t {
+typedef struct {
     uint16_t value; //!< The actual value
     uint16_t invvalue; //!< The bitwise inverse of the value, used for integrity checks to detect fault injection attempts
 } ca_uint16_t;
@@ -115,7 +115,7 @@ typedef struct ca_uint16_t {
  * @brief uint8_t returned by ca_ret_N functions, must be passed to comparison
  * functions.
 */
-typedef struct ca_uint8_t {
+typedef struct {
     uint8_t value; //!< The actual value
     uint8_t invvalue; //!< The bitwise inverse of the value, used for integrity checks to detect fault injection attempts
 } ca_uint8_t;

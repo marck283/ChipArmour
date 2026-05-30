@@ -8,15 +8,6 @@
 
 #define UINT_TYPE(bitsize) uint##bitsize##_t
 
-#define RANDOM_UINT(bitsize, upper_bound) \
-    do { \
-        UINT_TYPE(bitsize) result = RET_ERR; \
-        if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) { \
-            return -1; \
-        } \
-        return result; \
-    } while(0)
-
 typedef enum {
     RET_OK = 0,
     RET_ERR = -1
@@ -36,5 +27,47 @@ void random_init(void);
  * @return ret_t RET_OK on success, RET_ERR on failure.
  */
 ret_t random(uint8_t * buf, uint32_t len, uint8_t upper_bound);
+
+/** 
+ * @brief Static inline implementations used by the RANDOM_UINT macro. These return 0 on
+ * failure so they can be used inside expressions.
+*/
+static inline uint64_t _random_uint_impl_64(uint64_t upper_bound)
+{
+    uint64_t result = 0;
+    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
+        return 0;
+    }
+    return result;
+}
+
+static inline uint32_t _random_uint_impl_32(uint32_t upper_bound)
+{
+    uint32_t result = 0;
+    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
+        return 0;
+    }
+    return result;
+}
+
+static inline uint16_t _random_uint_impl_16(uint16_t upper_bound)
+{
+    uint16_t result = 0;
+    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
+        return 0;
+    }
+    return result;
+}
+
+static inline uint8_t _random_uint_impl_8(uint8_t upper_bound)
+{
+    uint8_t result = 0;
+    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
+        return 0;
+    }
+    return result;
+}
+
+#define RANDOM_UINT(bitsize, upper_bound) _random_uint_impl_##bitsize((upper_bound))
 
 #endif

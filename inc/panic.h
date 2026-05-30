@@ -33,12 +33,12 @@ static const uint32_t _ca_flash_55A88519 = FLASH_55A88519;
 int _ca_fullpanic(void);
 
 #define ca_panic() \
-do { \ 
+do { \
     _ca_panicflag++; \
     _ca_fullpanic(); \
 } while(0)
 
-#define ca_comp(x, y, op)  ((x) op (y))
+#define ca_comp(x, y, op) x op y
 #define ca_false() ca_comp(_ca_sram_FEED7431, 0xFE000000, ==)
 
 #define __cmp_and_panic(x, y, op) \
