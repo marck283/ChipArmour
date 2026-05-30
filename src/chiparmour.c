@@ -35,7 +35,7 @@ typedef void (*ca_funcpointer)(void *);
 
 #define __check_and_set_min(input, min) \
 do { \
-    if (input.value < min.value){ \
+    if (ca_comp(input.value, min.value, <)) { \
         input.value = min.value; \
         input.invvalue = min.invvalue; \
     } \
@@ -43,7 +43,7 @@ do { \
 
 #define __check_and_set_max(input, max) \
 do { \
-    if (input.value > max.value){ \
+    if (ca_comp(input.value, max.value, >)) { \
         input.value = max.value; \
         input.invvalue = max.invvalue; \
     } \
@@ -136,6 +136,8 @@ CA_DO_COMPARE:
             ca_atmine();
             ca_atwait();
             if (equal == CA_CMP_LOOPS){
+                __cmp_and_panic(equal_function_mask, (uintptr_t)equal_function, !=);
+                __cmp_and_panic(equal_func_param_mask, (uintptr_t)equal_func_param, !=);
                 if(equal_function) {
                     equal_function(equal_func_param);
                 }
@@ -149,6 +151,8 @@ CA_DO_COMPARE:
             ca_atmine();
             ca_atwait();            
             if (unequal == CA_CMP_LOOPS){
+                __cmp_and_panic(unequal_function_mask, (uintptr_t)unequal_function, !=);
+                __cmp_and_panic(unequal_func_param_mask, (uintptr_t)unequal_func_param, !=);
                 if(unequal_function){
                     unequal_function(unequal_func_param);
                 }                
@@ -185,7 +189,7 @@ CA_DO_LOOP:
         ca_landmine();
         __cmp_and_panic(i != equal, i != unequal, &&);
         
-        if(i == CA_CMP_LOOPS) { 
+        if(i == CA_CMP_LOOPS) {
             ca_landmine();
             if (i == equal) {
                 equal_function_mask ^= (equal << 15);
@@ -193,7 +197,7 @@ CA_DO_LOOP:
                 goto CA_DO_COMPARE;
             } else if (i == unequal) {
                 unequal_function_mask ^= (unequal << 15);
-                unequal_func_param_mask ^= (equal << 15);
+                unequal_func_param_mask ^= (unequal << 15);
                 goto CA_DO_COMPARE;
             } else {
                 ca_panic();
@@ -261,6 +265,8 @@ CA_DO_COMPARE:
             ca_atmine();
             ca_atwait();
             if (equal == CA_CMP_LOOPS){
+                __cmp_and_panic(equal_function_mask, (uintptr_t)equal_function, !=);
+                __cmp_and_panic(equal_func_param_mask, (uintptr_t)equal_func_param, !=);
                 if(equal_function) {
                     equal_function(equal_func_param);
                 }
@@ -274,6 +280,8 @@ CA_DO_COMPARE:
             ca_atmine();
             ca_atwait();            
             if (unequal == CA_CMP_LOOPS){
+                __cmp_and_panic(unequal_function_mask, (uintptr_t)unequal_function, !=);
+                __cmp_and_panic(unequal_func_param_mask, (uintptr_t)unequal_func_param, !=);
                 if(unequal_function){
                     unequal_function(unequal_func_param);
                 }                
@@ -325,7 +333,7 @@ CA_DO_LOOP:
                 goto CA_DO_COMPARE;
             } else if (i == unequal) {
                 unequal_function_mask ^= (unequal << 15);
-                unequal_func_param_mask ^= (equal << 15);
+                unequal_func_param_mask ^= (unequal << 15);
                 goto CA_DO_COMPARE;
             } else {
                 ca_panic();

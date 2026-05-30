@@ -1,0 +1,143 @@
+\doxysection{monocypher-\/ed25519.h}
+\hypertarget{monocypher-ed25519_8h_source}{}\label{monocypher-ed25519_8h_source}\index{inc/monocypher-\/ed25519.h@{inc/monocypher-\/ed25519.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Monocypher\ version\ 4.0.2}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ This\ file\ is\ dual-\/licensed.\ \ Choose\ whichever\ licence\ you\ want\ from}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ the\ two\ licences\ listed\ below.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ The\ first\ licence\ is\ a\ regular\ 2-\/clause\ BSD\ licence.\ \ The\ second\ licence}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ is\ the\ CC-\/0\ from\ Creative\ Commons.\ It\ is\ intended\ to\ release\ Monocypher}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ to\ the\ public\ domain.\ \ The\ BSD\ licence\ serves\ as\ a\ fallback\ option.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ SPDX-\/License-\/Identifier:\ BSD-\/2-\/Clause\ OR\ CC0-\/1.0}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Copyright\ (c)\ 2017-\/2019,\ Loup\ Vaillant}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ All\ rights\ reserved.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ modification,\ are\ permitted\ provided\ that\ the\ following\ conditions\ are}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ met:}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ 1.\ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ 2.\ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \ \ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ documentation\ and/or\ other\ materials\ provided\ with\ the}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ distribution.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ "{}AS\ IS"{}\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ A\ PARTICULAR\ PURPOSE\ ARE\ DISCLAIMED.\ IN\ NO\ EVENT\ SHALL\ THE\ COPYRIGHT}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ HOLDER\ OR\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ SPECIAL,\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ LIMITED\ TO,\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ DATA,\ OR\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ THEORY\ OF\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ (INCLUDING\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ OF\ THIS\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ Written\ in\ 2017-\/2019\ by\ Loup\ Vaillant}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ To\ the\ extent\ possible\ under\ law,\ the\ author(s)\ have\ dedicated\ all\ copyright}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ and\ related\ neighboring\ rights\ to\ this\ software\ to\ the\ public\ domain}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ worldwide.\ \ This\ software\ is\ distributed\ without\ any\ warranty.}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ You\ should\ have\ received\ a\ copy\ of\ the\ CC0\ Public\ Domain\ Dedication\ along}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ with\ this\ software.\ \ If\ not,\ see}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ <https://creativecommons.org/publicdomain/zero/1.0/>}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#ifndef\ ED25519\_H}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ ED25519\_H}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#include\ "{}monocypher.h"{}}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#ifdef\ MONOCYPHER\_CPP\_NAMESPACE}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{namespace\ }MONOCYPHER\_CPP\_NAMESPACE\ \{}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#elif\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00062\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ Do\ not\ rely\ on\ the\ size\ or\ content\ on\ any\ of\ those\ types,}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ they\ may\ change\ without\ notice.}}
+\DoxyCodeLine{00071\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00072\ \ \ \ \ uint64\_t\ hash[8];}
+\DoxyCodeLine{00073\ \ \ \ \ uint64\_t\ input[16];}
+\DoxyCodeLine{00074\ \ \ \ \ uint64\_t\ input\_size[2];}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ input\_idx;}
+\DoxyCodeLine{00076\ \}\ \doxymbox{\hyperlink{structcrypto__sha512__ctx}{crypto\_sha512\_ctx}};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00079\ \ \ \ \ uint8\_t\ key[128];}
+\DoxyCodeLine{00080\ \ \ \ \ \doxymbox{\hyperlink{structcrypto__sha512__ctx}{crypto\_sha512\_ctx}}\ ctx;}
+\DoxyCodeLine{00081\ \}\ \doxymbox{\hyperlink{structcrypto__sha512__hmac__ctx}{crypto\_sha512\_hmac\_ctx}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ SHA\ 512}}
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}\ crypto\_sha512\_init\ \ (\doxymbox{\hyperlink{structcrypto__sha512__ctx}{crypto\_sha512\_ctx}}\ *ctx);}
+\DoxyCodeLine{00087\ \textcolor{keywordtype}{void}\ crypto\_sha512\_update(\doxymbox{\hyperlink{structcrypto__sha512__ctx}{crypto\_sha512\_ctx}}\ *ctx,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ \ message\_size);}
+\DoxyCodeLine{00089\ \textcolor{keywordtype}{void}\ crypto\_sha512\_final\ (\doxymbox{\hyperlink{structcrypto__sha512__ctx}{crypto\_sha512\_ctx}}\ *ctx,\ uint8\_t\ hash[64]);}
+\DoxyCodeLine{00090\ \textcolor{keywordtype}{void}\ crypto\_sha512(uint8\_t\ hash[64],}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ message\_size);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ SHA\ 512\ HMAC}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{void}\ crypto\_sha512\_hmac\_init(\doxymbox{\hyperlink{structcrypto__sha512__hmac__ctx}{crypto\_sha512\_hmac\_ctx}}\ *ctx,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *key,\ \textcolor{keywordtype}{size\_t}\ key\_size);}
+\DoxyCodeLine{00097\ \textcolor{keywordtype}{void}\ crypto\_sha512\_hmac\_update(\doxymbox{\hyperlink{structcrypto__sha512__hmac__ctx}{crypto\_sha512\_hmac\_ctx}}\ *ctx,}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ \ message\_size);}
+\DoxyCodeLine{00099\ \textcolor{keywordtype}{void}\ crypto\_sha512\_hmac\_final(\doxymbox{\hyperlink{structcrypto__sha512__hmac__ctx}{crypto\_sha512\_hmac\_ctx}}\ *ctx,\ uint8\_t\ hmac[64]);}
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{void}\ crypto\_sha512\_hmac(uint8\_t\ hmac[64],}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *key\ \ \ \ ,\ \textcolor{keywordtype}{size\_t}\ key\_size,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ message\_size);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ SHA\ 512\ HKDF}}
+\DoxyCodeLine{00105\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{void}\ crypto\_sha512\_hkdf\_expand(uint8\_t\ \ \ \ \ \ \ *okm,\ \ \textcolor{keywordtype}{size\_t}\ okm\_size,}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *prk,\ \ \textcolor{keywordtype}{size\_t}\ prk\_size,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *info,\ \textcolor{keywordtype}{size\_t}\ info\_size);}
+\DoxyCodeLine{00109\ \textcolor{keywordtype}{void}\ crypto\_sha512\_hkdf(uint8\_t\ \ \ \ \ \ \ *okm\ ,\ \textcolor{keywordtype}{size\_t}\ okm\_size,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *ikm\ ,\ \textcolor{keywordtype}{size\_t}\ ikm\_size,}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *salt,\ \textcolor{keywordtype}{size\_t}\ salt\_size,}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *info,\ \textcolor{keywordtype}{size\_t}\ info\_size);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ Ed25519}}
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ Signatures\ (EdDSA\ with\ curve25519\ +\ SHA-\/512)}}
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00118\ \textcolor{keywordtype}{void}\ crypto\_ed25519\_key\_pair(uint8\_t\ secret\_key[64],}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ public\_key[32],}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ seed[32]);}
+\DoxyCodeLine{00121\ \textcolor{keywordtype}{void}\ crypto\_ed25519\_sign(uint8\_t\ \ \ \ \ \ \ \ signature\ [64],}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \ secret\_key[64],}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ message\_size);}
+\DoxyCodeLine{00124\ \textcolor{keywordtype}{int}\ crypto\_ed25519\_check(\textcolor{keyword}{const}\ uint8\_t\ \ signature\ [64],}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \ public\_key[32],}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *message,\ \textcolor{keywordtype}{size\_t}\ message\_size);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{comment}{//\ Pre-\/hash\ variants}}
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ crypto\_ed25519\_ph\_sign(uint8\_t\ \ \ \ \ \ \ signature\ \ \ [64],}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ secret\_key\ \ [64],}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ message\_hash[64]);}
+\DoxyCodeLine{00132\ \textcolor{keywordtype}{int}\ crypto\_ed25519\_ph\_check(\textcolor{keyword}{const}\ uint8\_t\ signature\ \ \ [64],}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ public\_key\ \ [32],}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ message\_hash[64]);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00137\ \}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ED25519\_H}}
+
+\end{DoxyCode}

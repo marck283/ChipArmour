@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['of_20binary_20libraries_20vs_20source_20code_0',['Use of Binary Libraries vs. Source Code',['../d0/d30/md_README.html#autotoc_md3',1,'']]],
-  ['of_20library_1',['Status of Library',['../d0/d30/md_README.html#autotoc_md4',1,'']]],
-  ['other_20notes_2',['Legal and Other Notes',['../d0/d30/md_README.html#autotoc_md5',1,'']]]
+  ['mpu_20configuration_0',['MPU configuration',['../dc/dae/group__MSPM0L2228__MPU.html',1,'']]],
+  ['mpu_5fregion_5ft_1',['mpu_region_t',['../df/da9/structmpu__region__t.html',1,'']]],
+  ['mpu_5fregions_5fnum_2',['MPU_REGIONS_NUM',['../dc/dae/group__MSPM0L2228__MPU.html#ga454a683dd6a4eaf9b26058643e250031',1,'mpu.h']]]
 ];

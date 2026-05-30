@@ -18,10 +18,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-#include <stdint.h>
 
 #ifndef CHIPARMOUR_H
 #define CHIPARMOUR_H
+
+/**
+ * @brief Fault-injection hardening helpers used to duplicate critical control
+ *        flow and memory checks.
+ * @note These macros are inspired by software-based fault-injection
+ *       countermeasure patterns described by NCC Group.
+ */
+#define READ_U32(ptr) (*(volatile uint32_t *)(ptr))
+#define IF_FAILIN(cond) if ((cond) || (cond) || (cond))
+#define IF_FAILOUT(cond) if ((cond) && (cond) && (cond))
+#define FOR_FAILOUT(init, cond, incr) for (init; (cond) && (cond) && (cond); incr)
+#define FOR_FAILIN(init, cond, incr) for (init; (cond) || (cond) || (cond); incr)
+
+#include <stdint.h>
+#include "panic.h"
 
 /***************************************************************************
  Typedefs
@@ -104,10 +118,10 @@ do { \
     /* Validate we are returning to a valid call location */ \
     void * ca_ra = __builtin_extract_return_addr(__builtin_return_address(0)); \
     uint32_t ca_loopindx; \
-    for(ca_loopindx = 0; ca_loopindx < len(ca_functionname_valid_returnaddrs); ca_loopindx++){ \
+    FOR_FAILOUT(ca_loopindx = 0; ca_loopindx < len(ca_functionname_valid_returnaddrs); ca_loopindx++) { \
         /* The zero flag indicates end of array reached, shouldn't happen */ \
         __cmp_and_panic(ca_functionname_valid_returnaddrs[ca_loopindx], 0, ==); \
-        if (ca_functionname_valid_returnaddrs[ca_loopindx] == ca_ra){ \
+        IF_FAILIN (ca_functionname_valid_returnaddrs[ca_loopindx] == ca_ra){ \
             break; \
         } \
     } \

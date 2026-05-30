@@ -1,0 +1,47 @@
+\doxysection{mspm0l2228\+\_\+random.\+h}
+\hypertarget{mspm0l2228__random_8h_source}{}\label{mspm0l2228__random_8h_source}\index{inc/mspm0l2228/mspm0l2228\_random.h@{inc/mspm0l2228/mspm0l2228\_random.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MSPM0L2228\_RANDOM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MSPM0L2228\_RANDOM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}ti\_msp\_dl\_config.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}random.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}chacha20\_ietf\_random.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}chiparmour.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ trng\_init(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ DL\_TRNG\_disablePower(TRNG);}
+\DoxyCodeLine{00017\ \ \ \ \ DL\_TRNG\_reset(TRNG);}
+\DoxyCodeLine{00018\ \ \ \ \ DL\_TRNG\_enablePower(TRNG);}
+\DoxyCodeLine{00019\ \ \ \ \ delay\_cycles(POWER\_STARTUP\_DELAY);}
+\DoxyCodeLine{00020\ \ \ \ \ DL\_TRNG\_setClockDivider(TRNG,\ DL\_TRNG\_CLOCK\_DIVIDE\_2);}
+\DoxyCodeLine{00021\ \ \ \ \ DL\_TRNG\_setDecimationRate(TRNG,\ DL\_TRNG\_DECIMATION\_RATE\_4);}
+\DoxyCodeLine{00022\ \ \ \ \ DL\_TRNG\_sendCommand(TRNG,\ DL\_TRNG\_CMD\_NORM\_FUNC);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{while}\ (!DL\_TRNG\_isCommandDone(TRNG));}
+\DoxyCodeLine{00024\ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ trng\_fill(uint8\_t\ *buf,\ uint32\_t\ length)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{while}\ (length\ >\ 0)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!DL\_TRNG\_isCaptureReady(TRNG));}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ uint32\_t\ random\_word\ =\ DL\_TRNG\_getCapture(TRNG);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ uint32\_t\ bytes\_num\ =\ MIN(length,\ 4);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ memcpy(buf,\ \&random\_word,\ bytes\_num);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ buf\ +=\ bytes\_num;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ length\ -\/=\ MIN(length,\ bytes\_num);}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ sec\_write\_u32(\textcolor{keyword}{volatile}\ uint32\_t\ *dst,\ uint32\_t\ val)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ *dst\ =\ val;}
+\DoxyCodeLine{00053\ \ \ \ \ IF\_FAILIN\ (val\ !=\ *dst)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ causer\_panic();}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

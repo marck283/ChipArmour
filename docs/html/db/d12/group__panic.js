@@ -1,5 +1,5 @@
 var group__panic =
 [
-    [ "ca_landmine", "db/d12/group__panic.html#ga8e62dc43e9d9174c523cafb0c748e60b", null ],
-    [ "_ca_fullpanic", "db/d12/group__panic.html#ga6ae3544bc447ad5769019b728c8d794a", null ]
+    [ "_ca_fullpanic", "db/d12/group__panic.html#gab9df69de6715ee66793efd89949bcb7d", null ],
+    [ "_ca_panicflag", "db/d12/group__panic.html#ga1f66a71ea9a32b578c4186e185703187", null ]
 ];

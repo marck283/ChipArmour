@@ -15,25 +15,16 @@ Panic routines for handling critical errors.
 \+\#define {\bfseries FLASH\+\_\+55\+A88519}~0x55\+A88519
 \item 
 \+\#define \doxymbox{\hyperlink{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}{ca\+\_\+panic}}()
-\item 
-\+\#define \doxymbox{\hyperlink{group__panic_gad408d986052b18ccea94fca37d99013b}{\+\_\+\+\_\+cmp\+\_\+and\+\_\+panic}}(x,  y,  op)
-\item 
-\+\#define \doxymbox{\hyperlink{group__panic_ga8e62dc43e9d9174c523cafb0c748e60b}{ca\+\_\+landmine}}()
-\item 
-\+\#define \doxymbox{\hyperlink{group__panic_ga9a9abbb950ae3261b1521451ee75e5c6}{ca\+\_\+true}}()
-\item 
-\+\#define \doxymbox{\hyperlink{group__panic_ga932353a52e15f104baecf24eb01f84ec}{ca\+\_\+false}}()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \doxymbox{\hyperlink{group__panic_ga6ae3544bc447ad5769019b728c8d794a}{\+\_\+ca\+\_\+fullpanic}} (void)
+int \doxymbox{\hyperlink{group__panic_gab9df69de6715ee66793efd89949bcb7d}{\+\_\+ca\+\_\+fullpanic}} (void)
 \begin{DoxyCompactList}\small\item\em Handle any critical error. This function must be called through the {\ttfamily ca\+\_\+panic()} macro, which sets a panic flag and then calls this function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{group__panic_ga2e0d560835d418c122fd6f8fe922f293}\label{group__panic_ga2e0d560835d418c122fd6f8fe922f293} 
-static uint32\+\_\+t {\bfseries \+\_\+ca\+\_\+panicflag} = 0
+static uint32\+\_\+t \doxymbox{\hyperlink{group__panic_ga1f66a71ea9a32b578c4186e185703187}{\+\_\+ca\+\_\+panicflag}} = 0
 \item 
 \Hypertarget{group__panic_gaf0fbdf9d16238e14f0d5bc1369f715ec}\label{group__panic_gaf0fbdf9d16238e14f0d5bc1369f715ec} 
 static uint32\+\_\+t {\bfseries \+\_\+ca\+\_\+sram\+\_\+\+FEED7431} = FEED7431
@@ -51,48 +42,7 @@ Panic routines for handling critical errors.
 \label{group__panic_doc-define-members}
 \Hypertarget{group__panic_doc-define-members}
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{group__panic_gad408d986052b18ccea94fca37d99013b}\index{Panic@{Panic}!\_\_cmp\_and\_panic@{\_\_cmp\_and\_panic}}
-\index{\_\_cmp\_and\_panic@{\_\_cmp\_and\_panic}!Panic@{Panic}}
-\doxysubsubsection{\texorpdfstring{\_\_cmp\_and\_panic}{\_\_cmp\_and\_panic}}
-{\footnotesize\ttfamily \label{group__panic_gad408d986052b18ccea94fca37d99013b} 
-\+\#define \+\_\+\+\_\+cmp\+\_\+and\+\_\+panic(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{op}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ if\ ((x)\ op\ (y))\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ ca\_panic();\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \}\ \(\backslash\)}
-\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
-
-\end{DoxyCode}
-\Hypertarget{group__panic_ga932353a52e15f104baecf24eb01f84ec}\index{Panic@{Panic}!ca\_false@{ca\_false}}
-\index{ca\_false@{ca\_false}!Panic@{Panic}}
-\doxysubsubsection{\texorpdfstring{ca\_false}{ca\_false}}
-{\footnotesize\ttfamily \label{group__panic_ga932353a52e15f104baecf24eb01f84ec} 
-\+\#define ca\+\_\+false(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{(\_ca\_sram\_FEED7431\ ==\ 0xFE000000)}
-
-\end{DoxyCode}
-\Hypertarget{group__panic_ga8e62dc43e9d9174c523cafb0c748e60b}\index{Panic@{Panic}!ca\_landmine@{ca\_landmine}}
-\index{ca\_landmine@{ca\_landmine}!Panic@{Panic}}
-\doxysubsubsection{\texorpdfstring{ca\_landmine}{ca\_landmine}}
-{\footnotesize\ttfamily \label{group__panic_ga8e62dc43e9d9174c523cafb0c748e60b} 
-\+\#define ca\+\_\+landmine(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_sram\_FEED7431,\ FEED7431,\ !=);\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_flash\_55A88519,\ FLASH\_55A88519,\ !=);\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \_\_cmp\_and\_panic(\_ca\_sram\_FEED7431,\ \_ca\_flash\_55A88519,\ ==);\ \(\backslash\)}
-\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
-
-\end{DoxyCode}
-Jumps to the panic function if one of two comparisons fail. \Hypertarget{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}\index{Panic@{Panic}!ca\_panic@{ca\_panic}}
+\Hypertarget{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}\index{Panic@{Panic}!ca\_panic@{ca\_panic}}
 \index{ca\_panic@{ca\_panic}!Panic@{Panic}}
 \doxysubsubsection{\texorpdfstring{ca\_panic}{ca\_panic}}
 {\footnotesize\ttfamily \label{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682} 
@@ -101,20 +51,6 @@ Jumps to the panic function if one of two comparisons fail. \Hypertarget{group__
 {\bfseries Value:\+}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \_ca\_panicflag++;\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \_ca\_fullpanic();\ \(\backslash\)}
-\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
-
-\end{DoxyCode}
-\Hypertarget{group__panic_ga9a9abbb950ae3261b1521451ee75e5c6}\index{Panic@{Panic}!ca\_true@{ca\_true}}
-\index{ca\_true@{ca\_true}!Panic@{Panic}}
-\doxysubsubsection{\texorpdfstring{ca\_true}{ca\_true}}
-{\footnotesize\ttfamily \label{group__panic_ga9a9abbb950ae3261b1521451ee75e5c6} 
-\+\#define ca\+\_\+true(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{(\_ca\_sram\_FEED7431\ ==\ FEED7431)}
 
 \end{DoxyCode}
 
@@ -122,11 +58,11 @@ Jumps to the panic function if one of two comparisons fail. \Hypertarget{group__
 \label{group__panic_doc-func-members}
 \Hypertarget{group__panic_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{group__panic_ga6ae3544bc447ad5769019b728c8d794a}\index{Panic@{Panic}!\_ca\_fullpanic@{\_ca\_fullpanic}}
+\Hypertarget{group__panic_gab9df69de6715ee66793efd89949bcb7d}\index{Panic@{Panic}!\_ca\_fullpanic@{\_ca\_fullpanic}}
 \index{\_ca\_fullpanic@{\_ca\_fullpanic}!Panic@{Panic}}
 \doxysubsubsection{\texorpdfstring{\_ca\_fullpanic()}{\_ca\_fullpanic()}}
-{\footnotesize\ttfamily \label{group__panic_ga6ae3544bc447ad5769019b728c8d794a} 
-int \+\_\+ca\+\_\+fullpanic (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{group__panic_gab9df69de6715ee66793efd89949bcb7d} 
+\+\_\+ca\+\_\+fullpanic (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 
@@ -138,3 +74,15 @@ This function should never return and is designed to halt the system in a safe s
 \begin{DoxyWarning}{Warning}
 This function will enter an infinite loop, effectively halting the system. It should only be used in situations where recovery is not possible or safe, and it should be called through the {\ttfamily ca\+\_\+panic()} macro to ensure the panic flag is set correctly. 
 \end{DoxyWarning}
+
+
+\label{group__panic_doc-var-members}
+\Hypertarget{group__panic_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__panic_ga1f66a71ea9a32b578c4186e185703187}\index{Panic@{Panic}!\_ca\_panicflag@{\_ca\_panicflag}}
+\index{\_ca\_panicflag@{\_ca\_panicflag}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{\_ca\_panicflag}{\_ca\_panicflag}}
+{\footnotesize\ttfamily \label{group__panic_ga1f66a71ea9a32b578c4186e185703187} 
+\+\_\+ca\+\_\+panicflag = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+These flags are stored in RAM right now. You might want to store them in flash or some other non-\/volatile memory depending on your use case. The important thing is that they are stored in a way that makes it difficult for an attacker to tamper with them without causing a crash or other detectable failure. 

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['templates_0',['Example Projects and Templates',['../d0/d30/md_README.html#autotoc_md1',1,'']]],
-  ['trademark_20disclaimers_1',['Trademark Disclaimers',['../d0/d30/md_README.html#autotoc_md9',1,'']]]
+  ['random_5fstate_5ft_0',['random_state_t',['../d6/d48/structrandom__state__t.html',1,'']]],
+  ['rasr_1',['RASR',['../df/d64/structARM__MPU__Region__t.html#a38c1d3bc6a9ffc9423d633add01928f1',1,'ARM_MPU_Region_t']]],
+  ['rbar_2',['RBAR',['../df/d64/structARM__MPU__Region__t.html#afe7a7721aa08988d915670efa432cdd2',1,'ARM_MPU_Region_t']]]
 ];

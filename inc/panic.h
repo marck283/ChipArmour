@@ -10,6 +10,12 @@
 #define FEED7431 0xFEED7431
 #define FLASH_55A88519 0x55A88519
 
+/** 
+ * These flags are stored in RAM right now. You might want to store them in flash or some other 
+ * non-volatile memory depending on your use case. The important thing is that they are stored 
+ * in a way that makes it difficult for an attacker to tamper with them without causing a crash 
+ * or other detectable failure.
+*/
 static uint32_t _ca_panicflag = 0;
 static uint32_t _ca_sram_FEED7431 = FEED7431;
 static const uint32_t _ca_flash_55A88519 = FLASH_55A88519;
@@ -27,30 +33,30 @@ static const uint32_t _ca_flash_55A88519 = FLASH_55A88519;
 int _ca_fullpanic(void);
 
 #define ca_panic() \
-do { \
+do { \ 
     _ca_panicflag++; \
     _ca_fullpanic(); \
 } while(0)
 
+#define ca_comp(x, y, op)  ((x) op (y))
+#define ca_false() ca_comp(_ca_sram_FEED7431, 0xFE000000, ==)
+
 #define __cmp_and_panic(x, y, op) \
 do { \
-    if ((x) op (y)) { \
+    if (ca_comp(x, y, op)) { \
         ca_panic(); \
     } \
 } while(0)
 
 /** 
-  Jumps to the panic function if one of two comparisons fail.
-  */
+ * @brief Jumps to the panic function if one of two comparisons fail.
+*/
 #define ca_landmine() \
 do { \
     __cmp_and_panic(_ca_sram_FEED7431, FEED7431, !=); \
     __cmp_and_panic(_ca_flash_55A88519, FLASH_55A88519, !=); \
     __cmp_and_panic(_ca_sram_FEED7431, _ca_flash_55A88519, ==); \
 } while(0)
-
-#define ca_true()  (_ca_sram_FEED7431 == FEED7431)
-#define ca_false() (_ca_sram_FEED7431 == 0xFE000000)
 
 /** @} */
 

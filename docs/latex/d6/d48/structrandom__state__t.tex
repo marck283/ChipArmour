@@ -1,0 +1,59 @@
+\doxysection{random\+\_\+state\+\_\+t Struct Reference}
+\hypertarget{structrandom__state__t}{}\label{structrandom__state__t}\index{random\_state\_t@{random\_state\_t}}
+
+
+Internal state used by the random number generation subsystem.  
+
+
+
+
+{\ttfamily \+\#include $<$chacha20\+\_\+ietf\+\_\+random.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{structrandom__state__t_ab395fdf35f6a01122268c997959bd097}{key}} \+[32]\+
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{structrandom__state__t_ae9d5d3cae205a41be28cd72f3baa7ec6}{nonce}} \+[12]\+
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structrandom__state__t_ac20dee5a1a82823c97f0094befe3506d}{ctr}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{structrandom__state__t_aa810575bee31660b880dd3852eb7b0ad}{trng\+\_\+initialized}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Internal state used by the random number generation subsystem. 
+
+\label{structrandom__state__t_doc-variable-members}
+\Hypertarget{structrandom__state__t_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structrandom__state__t_ac20dee5a1a82823c97f0094befe3506d}\index{random\_state\_t@{random\_state\_t}!ctr@{ctr}}
+\index{ctr@{ctr}!random\_state\_t@{random\_state\_t}}
+\doxysubsubsection{\texorpdfstring{ctr}{ctr}}
+{\footnotesize\ttfamily \label{structrandom__state__t_ac20dee5a1a82823c97f0094befe3506d} 
+uint32\+\_\+t random\+\_\+state\+\_\+t::\+ctr}
+
+Internal counter used by the generator. \Hypertarget{structrandom__state__t_ab395fdf35f6a01122268c997959bd097}\index{random\_state\_t@{random\_state\_t}!key@{key}}
+\index{key@{key}!random\_state\_t@{random\_state\_t}}
+\doxysubsubsection{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily \label{structrandom__state__t_ab395fdf35f6a01122268c997959bd097} 
+uint8\+\_\+t random\+\_\+state\+\_\+t::\+key\+[32]\+}
+
+Key material used by the DRBG. \Hypertarget{structrandom__state__t_ae9d5d3cae205a41be28cd72f3baa7ec6}\index{random\_state\_t@{random\_state\_t}!nonce@{nonce}}
+\index{nonce@{nonce}!random\_state\_t@{random\_state\_t}}
+\doxysubsubsection{\texorpdfstring{nonce}{nonce}}
+{\footnotesize\ttfamily \label{structrandom__state__t_ae9d5d3cae205a41be28cd72f3baa7ec6} 
+uint8\+\_\+t random\+\_\+state\+\_\+t::\+nonce\+[12]\+}
+
+Nonce used for random generation. \Hypertarget{structrandom__state__t_aa810575bee31660b880dd3852eb7b0ad}\index{random\_state\_t@{random\_state\_t}!trng\_initialized@{trng\_initialized}}
+\index{trng\_initialized@{trng\_initialized}!random\_state\_t@{random\_state\_t}}
+\doxysubsubsection{\texorpdfstring{trng\_initialized}{trng\_initialized}}
+{\footnotesize\ttfamily \label{structrandom__state__t_aa810575bee31660b880dd3852eb7b0ad} 
+uint8\+\_\+t random\+\_\+state\+\_\+t::\+trng\+\_\+initialized}
+
+Indicates whether the TRNG has been initialized. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+inc/\+chacha20/\+chacha20\+\_\+ietf\+\_\+random.\+h\end{DoxyCompactItemize}

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['rasr_0',['RASR',['../df/d64/structARM__MPU__Region__t.html#a38c1d3bc6a9ffc9423d633add01928f1',1,'ARM_MPU_Region_t']]],
-  ['rbar_1',['RBAR',['../df/d64/structARM__MPU__Region__t.html#afe7a7721aa08988d915670efa432cdd2',1,'ARM_MPU_Region_t']]]
+  ['of_20binary_20libraries_20vs_20source_20code_0',['Use of Binary Libraries vs. Source Code',['../d0/d30/md_README.html#autotoc_md3',1,'']]],
+  ['of_20library_1',['Status of Library',['../d0/d30/md_README.html#autotoc_md4',1,'']]],
+  ['other_20notes_2',['Legal and Other Notes',['../d0/d30/md_README.html#autotoc_md5',1,'']]]
 ];

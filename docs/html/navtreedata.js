@@ -36,7 +36,8 @@ var NAVTREE =
         [ "Security Disclosure, Bug Bounty", "d0/d30/md_README.html#autotoc_md7", null ],
         [ "ChipArmour vs. ChipArmor", "d0/d30/md_README.html#autotoc_md8", null ],
         [ "Trademark Disclaimers", "d0/d30/md_README.html#autotoc_md9", null ]
-      ] ]
+      ] ],
+      [ "Disclaimer", "d0/d30/md_README.html#autotoc_md10", null ]
     ] ],
     [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [

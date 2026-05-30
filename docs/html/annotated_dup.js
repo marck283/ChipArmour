@@ -1,13 +1,29 @@
 var annotated_dup =
 [
     [ "ARM_MPU_Region_t", "df/d64/structARM__MPU__Region__t.html", "df/d64/structARM__MPU__Region__t" ],
+    [ "blk", "de/d6a/structblk.html", null ],
     [ "ca_funcpointer_t", "d4/dca/structca__funcpointer__t.html", null ],
     [ "ca_ret_u16_state_t", "d5/d33/structca__ret__u16__state__t.html", "d5/d33/structca__ret__u16__state__t" ],
     [ "ca_ret_u32_state_t", "d6/d4b/structca__ret__u32__state__t.html", "d6/d4b/structca__ret__u32__state__t" ],
+    [ "ca_ret_u64_state_t", "d4/d2d/structca__ret__u64__state__t.html", "d4/d2d/structca__ret__u64__state__t" ],
     [ "ca_ret_u8_state_t", "d1/d4a/structca__ret__u8__state__t.html", "d1/d4a/structca__ret__u8__state__t" ],
     [ "ca_uint16_t", "d2/dbf/structca__uint16__t.html", "d2/dbf/structca__uint16__t" ],
     [ "ca_uint32_t", "d7/de5/structca__uint32__t.html", "d7/de5/structca__uint32__t" ],
+    [ "ca_uint64_t", "da/df0/structca__uint64__t.html", "da/df0/structca__uint64__t" ],
     [ "ca_uint8_t", "de/d9b/structca__uint8__t.html", "de/d9b/structca__uint8__t" ],
+    [ "crypto_aead_ctx", "d0/d50/structcrypto__aead__ctx.html", null ],
+    [ "crypto_argon2_config", "d9/da0/structcrypto__argon2__config.html", null ],
+    [ "crypto_argon2_extras", "d1/d69/structcrypto__argon2__extras.html", null ],
+    [ "crypto_argon2_inputs", "de/da0/structcrypto__argon2__inputs.html", null ],
+    [ "crypto_blake2b_ctx", "d5/d6c/structcrypto__blake2b__ctx.html", null ],
+    [ "crypto_poly1305_ctx", "d5/df3/structcrypto__poly1305__ctx.html", null ],
+    [ "crypto_sha512_ctx", "d4/d67/structcrypto__sha512__ctx.html", null ],
+    [ "crypto_sha512_hmac_ctx", "d5/d6f/structcrypto__sha512__hmac__ctx.html", null ],
+    [ "ge", "d5/d01/structge.html", null ],
+    [ "ge_cached", "d3/d4e/structge__cached.html", null ],
+    [ "ge_precomp", "df/da4/structge__precomp.html", null ],
     [ "image_t", "db/da9/structimage__t.html", null ],
-    [ "mpu_region_t", "df/da9/structmpu__region__t.html", null ]
+    [ "mpu_region_t", "df/da9/structmpu__region__t.html", null ],
+    [ "random_state_t", "d6/d48/structrandom__state__t.html", "d6/d48/structrandom__state__t" ],
+    [ "slide_ctx", "d0/d84/structslide__ctx.html", null ]
 ];

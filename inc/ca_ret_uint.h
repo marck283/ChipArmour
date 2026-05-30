@@ -1,6 +1,83 @@
 #ifndef CA_RET_UINT_H
 #define CA_RET_UINT_H
 
+#include <stdint.h>
+#include "panic.h"
+#include "random.h"
+
+#define ca_get_delay(maxdelay) _Generic((maxdelay), \
+    uint64_t: (RANDOM_UINT(64, (maxdelay), 8)) % UINT64_MAX, \
+    uint32_t: (RANDOM_UINT(32, (maxdelay), 4)) % UINT32_MAX, \
+    uint16_t: (RANDOM_UINT(16, (maxdelay), 2)) % UINT16_MAX, \
+    uint8_t: (RANDOM_UINT(8, (maxdelay), 1)) % UINT8_MAX, \
+    default: 0 \
+)
+
+#define CA_RET_STATE_TYPE(bitsize) ca_ret_u##bitsize##_state_t
+#define CA_UINT_TYPE(bitsize) ca_uint##bitsize##_t
+
+#define CA_RET_STATE_INIT(bitsize) \
+    (CA_RET_STATE_TYPE(bitsize)) { \
+        .delay = ca_get_delay((maxdelay)), \
+        .i = 0, \
+        .local_value = 0 \
+    }
+
+#define CA_RET_UINT_STATE(value, maxdelay) _Generic((value), \
+    uint64_t: CA_RET_STATE_INIT(64), \
+    uint32_t: CA_RET_STATE_INIT(32), \
+    uint16_t: CA_RET_STATE_INIT(16), \
+    uint8_t: CA_RET_STATE_INIT(8) \
+)
+
+#define CA_RETFAST_INIT(bitsize, val) \
+    (struct CA_UINT_TYPE(bitsize)) { \
+        .value = (val), \
+        .invvalue = (~(val)) \
+    }
+
+#define SET_STATE_LOCAL_VALUE(state, value) \
+    do { \
+        ca_landmine(); \
+        __cmp_and_panic((value).invvalue, ~(value).value, !=); \
+        state.local_value = (value).value - state.delay; \
+        __cmp_and_panic((value).invvalue, ~(value).value, !=); \
+    } while (0)
+
+#define STATE_INCREMENT_AND_CHECK(state) \
+    do { \
+        state.i++; \
+        state.local_value++; \
+        __cmp_and_panic(state.i, state.delay, >); \
+        ca_landmine(); \
+    } while (0)
+
+#define CHECK_DELAY(state, retval) \
+    do { \
+        if (ca_comp((state).i, (state).delay, ==)) { \
+            return (retval); \
+        } \
+    } while (0)
+
+#define _CA_RET_UINT(bitsize, value, maxdelay) \
+    do { \
+        ca_landmine(); \
+        CA_RET_STATE_TYPE(bitsize) state = CA_RET_UINT_STATE(value.value, maxdelay); \
+        SET_STATE_LOCAL_VALUE(state, value); \
+        CA_UINT_TYPE(bitsize) invalid_rv = {0}; \
+        while (ca_comp(_ca_sram_FEED7431, FEED7431, ==)) { \
+            STATE_INCREMENT_AND_CHECK(state); \
+            CHECK_DELAY(state, CA_RETFAST_INIT(bitsize, state.local_value)); \
+            CHECK_DELAY(state, invalid_rv); \
+            ca_landmine(); \
+            CHECK_DELAY(state, invalid_rv); \
+            __cmp_and_panic(state.i, state.delay, >); \
+        } \
+        ca_landmine(); \
+        ca_panic(); \
+        return invalid_rv; \
+    } while(0)
+
 /**
  * @defgroup ca_ret_uint
  * @brief Structures and functions to return uint values with fault injection armouring.
@@ -8,8 +85,17 @@
  */
 
 /**
-    uint32_t returned by ca_ret_N functions, must be passed to comparison
-     functions.
+ * @brief uint64_t returned by ca_ret_N functions, must be passed to comparison
+ * functions.
+*/
+typedef struct ca_uint64_t {
+    uint64_t value; //!< The actual value
+    uint64_t invvalue; //!< The bitwise inverse of the value, used for integrity checks to detect fault injection attempts
+} ca_uint64_t;
+
+/**
+ * @brief uint32_t returned by ca_ret_N functions, must be passed to comparison
+ * functions.
 */
 typedef struct ca_uint32_t {
     uint32_t value; //!< The actual value
@@ -17,8 +103,8 @@ typedef struct ca_uint32_t {
 } ca_uint32_t;
 
 /**
-    uint16_t returned by ca_ret_N functions, must be passed to comparison
-     functions.
+ * @brief uint16_t returned by ca_ret_N functions, must be passed to comparison
+ * functions.
 */
 typedef struct ca_uint16_t {
     uint16_t value; //!< The actual value
@@ -26,8 +112,8 @@ typedef struct ca_uint16_t {
 } ca_uint16_t;
 
 /**
-    uint8_t returned by ca_ret_N functions, must be passed to comparison
-     functions.
+ * @brief uint8_t returned by ca_ret_N functions, must be passed to comparison
+ * functions.
 */
 typedef struct ca_uint8_t {
     uint8_t value; //!< The actual value
@@ -35,7 +121,16 @@ typedef struct ca_uint8_t {
 } ca_uint8_t;
 
 /**
- * State struct for ca_ret_u32 to assist with FI armouring.
+ * @brief State struct for _ca_ret_u64 to assist with FI armouring.
+ */
+typedef struct {
+    uint64_t delay; //!< Random delay value, generated at the start of the function this structure is used in
+    uint64_t i; //!< Loop counter, incremented in the loop to create the delay
+    uint64_t local_value; //!< Local copy of the value being returned, modified in the loop to create a changing state that can be checked for FI attempts
+} ca_ret_u64_state_t;
+
+/**
+ * @brief State struct for _ca_ret_u32 to assist with FI armouring.
  */
 typedef struct {
     uint32_t delay; //!< Random delay value, generated at the start of the function this structure is used in
@@ -44,7 +139,7 @@ typedef struct {
 } ca_ret_u32_state_t;
 
 /**
- * State struct for ca_ret_u16 to assist with FI armouring.
+ * @brief State struct for _ca_ret_u16 to assist with FI armouring.
  */
 typedef struct {
     uint16_t delay; //!< Random delay value, generated at the start of the function this structure is used in
@@ -53,7 +148,7 @@ typedef struct {
 } ca_ret_u16_state_t;
 
 /**
- * State struct for ca_ret_u8 to assist with FI armouring.
+ * @brief State struct for _ca_ret_u8 to assist with FI armouring.
  */
 typedef struct {
     uint8_t delay; //!< Random delay value, generated at the start of the function this structure is used in
@@ -62,22 +157,109 @@ typedef struct {
 } ca_ret_u8_state_t;
 
 /**
-    Returns a 32-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
+ * @brief Returns an unsigned 64-bit value, but adds armour around the return
+ * function to catch fault injection attempts.
+ * 
+ * @param value The value to return, passed as a ca_uint64_t struct with the value and its 
+ * bitwise inverse for integrity checks.
+ * @param magic A magic value for integrity checks.
+ * @param maxdelay The maximum delay for the return function.
+ * 
+ * @return ca_uint64_t The value wrapped in a struct with its bitwise inverse for integrity checks.
+ * 
+ * @warning This function is not for use alone. Please use the `CA_RET_UINT` macro instead.
+*/
+ca_uint64_t _ca_ret_u64(ca_uint64_t value, ca_uint64_t magic, uint64_t maxdelay);
+
+/**
+ * @brief Returns a 64-bit unsigned int, but after a random delay to assist with 
+ * FI armouring.
+ * 
+ * @param value The value to return.
+ * 
+ * @return ca_uint64_t The value wrapped in a struct with its bitwise inverse for integrity checks.
+*/
+ca_uint64_t ca_retfast_u64(uint64_t value);
+
+/**
+ * @brief Returns an unsigned 32-bit value, but adds armour around the return
+ * function to catch fault injection attempts.
+ * 
+ * @param value The value to return, passed as a ca_uint32_t struct with the value and its 
+ * bitwise inverse for integrity checks.
+ * @param magic A magic value for integrity checks.
+ * @param maxdelay The maximum delay for the return function.
+ * 
+ * @return ca_uint32_t The value wrapped in a struct with its bitwise inverse for integrity checks.
+ * 
+ * @warning This function is not for use alone. Please use the `CA_RET_UINT` macro instead.
+*/
+ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay);
+
+/**
+ * @brief Returns a 32-bit unsigned int, but after a random delay to assist with 
+ * FI armouring.
+ * 
+ * @param value The value to return.
+ * 
+ * @return ca_uint32_t The value wrapped in a struct with its bitwise inverse for integrity checks.
 */
 ca_uint32_t ca_retfast_u32(uint32_t value);
 
 /**
-    Returns a 16-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
+ * @brief Returns an unsigned 16-bit value, but adds armour around the return
+ * function to catch fault injection attempts.
+ * 
+ * @param value The value to return, passed as a ca_uint16_t struct with the value and its 
+ * bitwise inverse for integrity checks.
+ * @param magic A magic value for integrity checks.
+ * @param maxdelay The maximum delay for the return function.
+ * 
+ * @return ca_uint16_t The value wrapped in a struct with its bitwise inverse for integrity checks.
+ * 
+ * @warning This function is not for use alone. Please use the `CA_RET_UINT` macro instead.
+*/
+ca_uint16_t _ca_ret_u16(ca_uint16_t value, ca_uint16_t magic, uint16_t maxdelay);
+
+/**
+ * @brief Returns a 16-bit unsigned int, but after a random delay to assist with 
+ * FI armouring.
+ * 
+ * @param value The value to return.
+ * 
+ * @return ca_uint16_t The value wrapped in a struct with its bitwise inverse for integrity checks.
 */
 ca_uint16_t ca_retfast_u16(uint16_t value);
 
 /**
-    Returns an 8-bit unsigned int, but after a random delay to assist with 
-    FI armouring.
+ * @brief Returns an unsigned 8-bit value, but adds armour around the return
+ * function to catch fault injection attempts.
+ * @param value The value to return, passed as a ca_uint8_t struct with the value and its 
+ * bitwise inverse for integrity checks.
+ * @param magic A magic value for integrity checks.
+ * @param maxdelay The maximum delay for the return function.
+ * 
+ * @return ca_uint8_t The value wrapped in a struct with its bitwise inverse for integrity checks.
+ * 
+ * @warning This function is not for use alone. Please use the `CA_RET_UINT` macro instead.
 */
+ca_uint8_t _ca_ret_u8(ca_uint8_t value, ca_uint8_t magic, uint8_t maxdelay);
+
+/**
+ * @brief Returns an 8-bit unsigned int, but after a random delay to assist with 
+ * FI armouring.
+ * 
+ * @param value The value to return.
+ * 
+ * @return ca_uint8_t The value wrapped in a struct with its bitwise inverse for integrity checks.
+ */
 ca_uint8_t ca_retfast_u8(uint8_t value);
+
+#define CA_RET_UINT(value, magic, maxdelay) _Generic((value), \
+    uint32_t: _ca_ret_u32(ca_retfast_u32((value)), ca_retfast_u32((magic)), (maxdelay)), \
+    uint16_t: _ca_ret_u16(ca_retfast_u16((value)), ca_retfast_u16((magic)), (maxdelay)), \
+    uint8_t: _ca_ret_u8(ca_retfast_u8((value)), ca_retfast_u8((magic)), (maxdelay)) \
+)
 
 /** @} */
 
