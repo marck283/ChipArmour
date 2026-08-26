@@ -7,6 +7,10 @@
 #ifndef MPU_H
 #define MPU_H
 
+#ifndef NULL
+#define NULL ((void*) 0)
+#endif
+
 /**
  * @def MPU_REGIONS_NUM
  * @brief Number of MPU regions.
@@ -36,15 +40,16 @@
 
 #include "ti_msp_dl_config.h"
 #include "armv7m_mpu.h"
+#include <stdint.h>
 
 /**
  * @enum mpu_access_t
  * @brief Enumeration for MPU access types, including normal memory, device memory, and ordered memory
  */
 typedef enum {
-    NORMAL = 0,
-    DEVICE = 1,
-    ORDERED = 2
+    NORMAL = 0, /**< Normal memory access type */
+    DEVICE = 1, /**< Device memory access type */
+    ORDERED = 2 /**< Ordered memory access type */
 } mpu_access_t;
 
 /**
@@ -54,15 +59,15 @@ typedef enum {
  *        policies, and shareability.
  */
 typedef struct mpu_region_t {
-    const uint8_t region_num; // Region number (1-7)
-    const uintptr_t base_addr; // Region base address
-    const mpu_access_t access_type; // MPU access type
-    const uint8_t ap; // Access permissions
-    const uint8_t region_size; // Region size
-    const uint8_t disable_exec; // Disable instruction execution (NX bit)
-    const uint32_t outer_cp; // Outer cache policy
-    const uint32_t inner_cp; // Inner cache policy
-    const uint32_t shareable; // Shareable attribute
+    const uint8_t region_num; /**< Region number (1-7) */
+    const uintptr_t base_addr; /**< Region base address */
+    const mpu_access_t access_type; /**< MPU access type */
+    const uint8_t ap; /**< Access permissions */
+    const uint8_t region_size; /**< Region size */
+    const uint8_t disable_exec; /**< Disable instruction execution (NX bit) */
+    const uint32_t outer_cp; /**< Outer cache policy */
+    const uint32_t inner_cp; /**< Inner cache policy */
+    const uint32_t shareable; /**< Shareable attribute */
 } mpu_region_t;
 
 /**
@@ -107,18 +112,20 @@ static inline void set_mpu_region(mpu_region_t region) {
  * memory, unprivileged user memory, flash regions, peripheral access, and the
  * kernel stack guard region.
  * 
+ * @param regions An array of `mpu_region_t` structures defining the MPU regions to configure.
+ * 
  * @return 0 on success, or `ENOPOINTER` if `regions` is NULL.
  *
  * @post The MPU is enabled with the memory layout required by the HSM
  *       privilege-separation model.
- * @note The configured regions restrict unprivileged access to privileged
- *       kernel memory and protect the kernel stack with a dedicated no-access
- *       guard region.
+ * @note depending on the firmware's memory layout, the configured regions can restrict 
+ *       unprivileged access to privileged kernel memory and protect the kernel stack 
+ *       with a dedicated no-access guard region.
  * @warning This function assumes Cortex-M0+ MPU with DREGION=8; re-validate MPU_TYPE.DREGION 
  *          when writing MPU protections for a different ARM MCU.
  */
 static inline uint8_t init_mpu(mpu_region_t regions[MPU_REGIONS_NUM]) {
-    if (regions == NULL) {
+    if (regions == NULL) { // Check for NULL pointer input
         return ENOPOINTER; // Handle NULL pointer input gracefully, though this should not happen in practice
     }
 

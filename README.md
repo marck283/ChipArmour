@@ -4,7 +4,7 @@ ChipArmour™ is an open-source library that helps developers build secure embed
 
 ChipArmour™ is linked to the ChipWhisperer® project, which was the first complete open-source toolchain for power analysis and fault injection. The ChipArmour™ libraries are automatically tested on a hardware testbench that validates the design decisions in real-life environments, by attempting fault injection attacks on the library.
 
-ChipArmour™ is designed to be a "minimal pain" solution for existing projects, without switching languages, compilers, etc. Currently it works with GCC (IAR should work with little effort). While it mostly focuses on FI prevention, other attacks (ROP, etc) will eventually be integrated.
+ChipArmour™ is designed to be a "minimal pain" solution for existing projects, without switching languages, compilers, etc. Currently it works with GCC (IAR should work with little effort) and tiarmclang. While it mostly focuses on FI prevention, other attacks (ROP, etc) will eventually be integrated.
 
 ## Example Projects and Templates
 

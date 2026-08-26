@@ -1,16 +1,37 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define CEIL(a, b) (((a) / (b)) + ((a) % (b) != 0))
+#define UINT_TYPE(bitsize) uint##bitsize##_t /**< Type for unsigned integer of specified bit size */
 
 #include <stdint.h>
 
-#define UINT_TYPE(bitsize) uint##bitsize##_t
+/**
+ * @brief Calculate the minimum of two values.
+ * @param a First value.
+ * @param b Second value.
+ * @return The minimum of a and b.
+ */
+inline uint32_t u32_min(uint32_t a, uint32_t b) {
+    return (a < b) ? a : b;
+}
 
+/**
+ * @brief Calculate the ceiling of the division of two values.
+ * @param a Numerator.
+ * @param b Denominator.
+ * @return The ceiling of a divided by b.
+ */
+__always_inline
+inline uint32_t u32_ceil(uint32_t a, uint32_t b) {
+    return (a / b) + (uint32_t) ((a % b) != 0);
+}
+
+/**
+ * @brief Return type for functions that can fail.
+ */
 typedef enum {
-    RET_OK = 0,
-    RET_ERR = -1
+    RET_OK = 0, /**< Success code */
+    RET_ERR = -1 /**< Failure code */
 } ret_t;
 
 /**
@@ -26,45 +47,45 @@ void random_init(void);
  * 
  * @return ret_t RET_OK on success, RET_ERR on failure.
  */
-ret_t random(uint8_t * buf, uint32_t len, uint8_t upper_bound);
+ret_t random(UINT_TYPE(8)* buf, UINT_TYPE(32) len, UINT_TYPE(8) upper_bound);
 
 /** 
- * @brief Static inline implementations used by the RANDOM_UINT macro. These return 0 on
- * failure so they can be used inside expressions.
-*/
-static inline uint64_t _random_uint_impl_64(uint64_t upper_bound)
+ * @brief Static inline implementations used by the RANDOM_UINT macro. These 
+ * do not return on failure.
+ */
+static inline UINT_TYPE(64) _random_uint_impl_64(UINT_TYPE(64) upper_bound)
 {
-    uint64_t result = 0;
-    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
-        return 0;
-    }
+    UINT_TYPE(64) result = 0;
+    UINT_TYPE(64) random_err = RET_ERR;
+    random_err = random((UINT_TYPE(8)*) &result, sizeof(result), (UINT_TYPE(8))((upper_bound) - 1));
+    __cmp_and_panic(random_err, RET_OK, !=);
     return result;
 }
 
-static inline uint32_t _random_uint_impl_32(uint32_t upper_bound)
+static inline UINT_TYPE(32) _random_uint_impl_32(UINT_TYPE(32) upper_bound)
 {
-    uint32_t result = 0;
-    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
-        return 0;
-    }
+    UINT_TYPE(32) result = 0;
+    UINT_TYPE(32) random_err = RET_ERR;
+    random_err = random((UINT_TYPE(8)*) &result, sizeof(result), (UINT_TYPE(8))((upper_bound) - 1));
+    __cmp_and_panic(random_err, RET_OK, !=);
     return result;
 }
 
-static inline uint16_t _random_uint_impl_16(uint16_t upper_bound)
+static inline UINT_TYPE(16) _random_uint_impl_16(UINT_TYPE(16) upper_bound)
 {
-    uint16_t result = 0;
-    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
-        return 0;
-    }
+    UINT_TYPE(16) result = 0;
+    UINT_TYPE(16) random_err = RET_ERR;
+    random_err = random((UINT_TYPE(8)*) &result, sizeof(result), (UINT_TYPE(8))((upper_bound) - 1));
+    __cmp_and_panic(random_err, RET_OK, !=);
     return result;
 }
 
-static inline uint8_t _random_uint_impl_8(uint8_t upper_bound)
+static inline UINT_TYPE(8) _random_uint_impl_8(UINT_TYPE(8) upper_bound)
 {
-    uint8_t result = 0;
-    if (random((uint8_t *)&result, sizeof(result), (uint8_t)((upper_bound) - 1)) != RET_OK) {
-        return 0;
-    }
+    UINT_TYPE(8) result = 0;
+    UINT_TYPE(8) random_err = RET_ERR;
+    random_err = random((UINT_TYPE(8)*) &result, sizeof(result), (UINT_TYPE(8))((upper_bound) - 1));
+    __cmp_and_panic(random_err, RET_OK, !=);
     return result;
 }
 

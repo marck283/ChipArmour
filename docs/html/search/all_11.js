@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['use_20of_20binary_20libraries_20vs_20source_20code_0',['Use of Binary Libraries vs. Source Code',['../d0/d30/md_README.html#autotoc_md3',1,'']]]
+  ['templates_0',['Example Projects and Templates',['../md_README.html#autotoc_md1',1,'']]],
+  ['trademark_20disclaimers_1',['Trademark Disclaimers',['../md_README.html#autotoc_md9',1,'']]],
+  ['trng_5finitialized_2',['trng_initialized',['../structrandom__state__t.html#aa810575bee31660b880dd3852eb7b0ad',1,'random_state_t']]]
 ];

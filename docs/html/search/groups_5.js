@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['return_20uint_20with_20fi_20armouring_0',['Return uint with FI armouring',['../d7/d34/group__ca__ret__uint.html',1,'']]]
+  ['panic_0',['Panic',['../group__panic.html',1,'']]]
 ];

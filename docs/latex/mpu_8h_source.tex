@@ -1,0 +1,84 @@
+\doxysection{mpu.\+h}
+\hypertarget{mpu_8h_source}{}\label{mpu_8h_source}\index{inc/mspm0l2228/mspm0l2228\_mpu\_config/mpu.h@{inc/mspm0l2228/mspm0l2228\_mpu\_config/mpu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ MPU\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ MPU\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ NULL}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ NULL\ ((void*)\ 0)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ MPU\_REGIONS\_NUM\ 8}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ ENOPOINTER\ -\/1}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ SUCCESS\ 0}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ "{}ti\_msp\_dl\_config.h"{}}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ "{}armv7m\_mpu.h"{}}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ NORMAL\ =\ 0,\ }
+\DoxyCodeLine{00051\ \ \ \ \ DEVICE\ =\ 1,\ }
+\DoxyCodeLine{00052\ \ \ \ \ ORDERED\ =\ 2\ }
+\DoxyCodeLine{00053\ \}\ mpu\_access\_t;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{structmpu__region__t_ac5c0d8a928600a340c47e6c4208475f0}{region\_num}};\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{const}\ uintptr\_t\ \doxymbox{\hyperlink{structmpu__region__t_a6ae466678e074c70f88ea6e8e604afa0}{base\_addr}};\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{const}\ mpu\_access\_t\ \doxymbox{\hyperlink{structmpu__region__t_a2a3d2dc8b99da7850404062254524900}{access\_type}};\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{structmpu__region__t_ae05ae9255f5ba3fbf64c1193166b0b27}{ap}};\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{structmpu__region__t_a1e2ec2ebb1136e9b95a99ef19b70e85d}{region\_size}};\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{structmpu__region__t_a5287614a1b611215c5c50923c76a013f}{disable\_exec}};\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \doxymbox{\hyperlink{structmpu__region__t_a938c50105d76e8132b94fdf68862154e}{outer\_cp}};\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \doxymbox{\hyperlink{structmpu__region__t_ab3d5e689d7eecf14b7781ef811957185}{inner\_cp}};\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \doxymbox{\hyperlink{structmpu__region__t_a8f8fc93fb492dce493bbbc8cb92c7745}{shareable}};\ }
+\DoxyCodeLine{00071\ \}\ \doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__MSPM0L2228__MPU_ga550cf7e73ae1ae8c1c22847c28ed8b9c}{set\_mpu\_region}}(\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ region)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ uint32\_t\ rasr\_attr;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{switch}\ (region.\doxymbox{\hyperlink{structmpu__region__t_a2a3d2dc8b99da7850404062254524900}{access\_type}})\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ DEVICE:\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_DEVICE(region.\doxymbox{\hyperlink{structmpu__region__t_a8f8fc93fb492dce493bbbc8cb92c7745}{shareable}});}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ORDERED:\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_ORDERED;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NORMAL:}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ rasr\_attr\ =\ ARM\_MPU\_ACCESS\_NORMAL(region.\doxymbox{\hyperlink{structmpu__region__t_a938c50105d76e8132b94fdf68862154e}{outer\_cp}},\ region.\doxymbox{\hyperlink{structmpu__region__t_ab3d5e689d7eecf14b7781ef811957185}{inner\_cp}},\ region.\doxymbox{\hyperlink{structmpu__region__t_a8f8fc93fb492dce493bbbc8cb92c7745}{shareable}});}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \ \ }
+\DoxyCodeLine{00100\ \ \ \ \ ARM\_MPU\_SetRegion(}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ ARM\_MPU\_RBAR(region.\doxymbox{\hyperlink{structmpu__region__t_ac5c0d8a928600a340c47e6c4208475f0}{region\_num}},\ region.\doxymbox{\hyperlink{structmpu__region__t_a6ae466678e074c70f88ea6e8e604afa0}{base\_addr}}),}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ ARM\_MPU\_RASR\_EX(region.\doxymbox{\hyperlink{structmpu__region__t_a5287614a1b611215c5c50923c76a013f}{disable\_exec}},\ region.\doxymbox{\hyperlink{structmpu__region__t_ae05ae9255f5ba3fbf64c1193166b0b27}{ap}},\ rasr\_attr,\ 0b00000000,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ region.\doxymbox{\hyperlink{structmpu__region__t_a1e2ec2ebb1136e9b95a99ef19b70e85d}{region\_size}}));}
+\DoxyCodeLine{00104\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ \doxymbox{\hyperlink{group__MSPM0L2228__MPU_ga41a07d67880888561c97913d40309c0d}{init\_mpu}}(\doxymbox{\hyperlink{structmpu__region__t}{mpu\_region\_t}}\ regions[\doxymbox{\hyperlink{group__MSPM0L2228__MPU_ga454a683dd6a4eaf9b26058643e250031}{MPU\_REGIONS\_NUM}}])\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (regions\ ==\ NULL)\ \{\ \textcolor{comment}{//\ Check\ for\ NULL\ pointer\ input}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MSPM0L2228__MPU_gaa27628297268fb669450d0e004d5c7d0}{ENOPOINTER}};\ \textcolor{comment}{//\ Handle\ NULL\ pointer\ input\ gracefully,\ though\ this\ should\ not\ happen\ in\ practice}}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{for}(uint8\_t\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{group__MSPM0L2228__MPU_ga454a683dd6a4eaf9b26058643e250031}{MPU\_REGIONS\_NUM}};\ i++)\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MSPM0L2228__MPU_ga550cf7e73ae1ae8c1c22847c28ed8b9c}{set\_mpu\_region}}(regions[i]);\ \textcolor{comment}{//\ This\ is\ an\ observable\ side-\/effect,\ so\ the\ compiler\ cannot\ optimize\ this\ for\ loop\ away}}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ ARM\_MPU\_Enable(MPU\_CTRL\_PRIVDEFENA\_Msk);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MSPM0L2228__MPU_gaa90cac659d18e8ef6294c7ae337f6b58}{SUCCESS}};\ \textcolor{comment}{//\ Return\ success}}
+\DoxyCodeLine{00139\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MPU\_H}}
+
+\end{DoxyCode}

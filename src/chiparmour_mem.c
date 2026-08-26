@@ -21,6 +21,7 @@ limitations under the License.
 
 /* See header file for function description (in one place to avoid doxygen problems). */
 #include "chiparmour.h"
+#include <ca_ret_uint.h>
 
 extern uint32_t CA_SECURE1_UNLOCK_KEY;
 
@@ -41,25 +42,32 @@ void ca_lock_secure1(void)
 
 void ca_unlock_secure1(uint32_t unlock_key)
 {
-    unsigned int matchcnt = 0;
+    const volatile uint32_t key = unlock_key;
+    volatile ca_uint32_t matchcnt = {
+        .value = 0,
+        .invvalue = ~0
+    };
     
     ca_landmine();
     
     while(1)
     {
-        if (unlock_key == CA_SECURE1_UNLOCK_KEY) {
-            matchcnt++;            
+        FULL_IF_FAILOUT (key == CA_SECURE1_UNLOCK_KEY) {
+            matchcnt.value++;
+            matchcnt.invvalue = ~matchcnt.value;
         } else {
             ca_panic();
         }
         
-        if (matchcnt == 3){
-            if (unlock_key == CA_SECURE1_UNLOCK_KEY) {
+        FULL_IF_FAILOUT ((matchcnt.value == 3) & (matchcnt.invvalue == ~matchcnt.value)) {
+            FULL_IF_FAILOUT (key == CA_SECURE1_UNLOCK_KEY) {
                 ca_hal_unlock();
                 return;
             } else {
                 ca_panic();
             }
+        } else {
+            ca_panic();
         }
     }
     ca_panic();

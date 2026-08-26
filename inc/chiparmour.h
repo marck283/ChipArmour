@@ -29,13 +29,10 @@ limitations under the License.
  *       countermeasure patterns described by NCC Group.
  */
 #define READ_U32(ptr) (*(volatile uint32_t *)(ptr))
-#define IF_FAILIN(cond) if ((cond) || (cond) || (cond))
-#define IF_FAILOUT(cond) if ((cond) && (cond) && (cond))
-#define FOR_FAILOUT(init, cond, incr) for (init; (cond) && (cond) && (cond); incr)
-#define FOR_FAILIN(init, cond, incr) for (init; (cond) || (cond) || (cond); incr)
 
 #include <stdint.h>
 #include "panic.h"
+#include "ca_ret_uint.h"
 
 /***************************************************************************
  Typedefs
@@ -70,21 +67,23 @@ typedef void (*ca_fptr_voidptr_array_t)(void * func_argument, uint8_t * value_ar
 */
 typedef int32_t (*ca_fptr_gethash_t)(void * image, uint8_t * hash, uint32_t len);
 
+/**
+ * @brief Function pointer type for a function that takes a void pointer and returns a uint32_t.
+ */
 typedef struct {
-    ca_fptr_voidptr_t value;
-    ca_fptr_voidptr_t invvalue;
+    ca_fptr_voidptr_t value; /**< Original value */
+    ca_fptr_voidptr_t invvalue; /**< Bitwise inverse of the value, used for integrity checks to detect fault injection attempts */
 } ca_funcpointer_t;
 
 /**
-    Complicated return values.
-*/
-enum ca_return_t { 
+ * @brief Enumerated type for complicated return values.
+ */
+typedef enum { 
     CA_SUCCESS = 0x5ABF0938,
     CA_FAIL    = 0x2820F02A,
     CA_BADARG  = 0x328A9201,
     CA_MEMERR  = 0x480ABFE1,
-};
-typedef enum ca_return_t ca_return_t;
+} ca_return_t;
 //Sidenote: To work as enum, restricted to positive values only (make sure top
 //          bit is clear).
 
@@ -108,24 +107,26 @@ void ca_hal_mpu_init(void);
  ***************************************************************************/
 
 #define CA_ROP_SET_MAX_RETURNS(functionname, maxreturns) \
-    static uint32_t ca_functionname_max_returns = maxreturns;
+    enum { ca_##functionname##_max_returns = maxreturns };
+
+#define CA_ROP_GET_MAX_RETURNS(functionname) ca_##functionname##_max_returns
 
 #define CA_ROP_RETURNADDRS_ARRAY(functionname) \
-    static void * ca_functionname_valid_returnaddrs[ca_functionname_max_returns];
+    static void * ca_##functionname##_valid_returnaddrs[ca_##functionname##_max_returns];
 
 #define CA_ROP_CHECK_VALID_RETURN(functionname) \
 do { \
     /* Validate we are returning to a valid call location */ \
     void * ca_ra = __builtin_extract_return_addr(__builtin_return_address(0)); \
     uint32_t ca_loopindx; \
-    FOR_FAILOUT(ca_loopindx = 0; ca_loopindx < len(ca_functionname_valid_returnaddrs); ca_loopindx++) { \
+    FULL_FOR_FAILOUT(ca_loopindx = 0, ca_loopindx < CA_ROP_GET_MAX_RETURNS(functionname), ca_loopindx++) { \
         /* The zero flag indicates end of array reached, shouldn't happen */ \
-        __cmp_and_panic(ca_functionname_valid_returnaddrs[ca_loopindx], 0, ==); \
-        IF_FAILIN (ca_functionname_valid_returnaddrs[ca_loopindx] == ca_ra){ \
+        __cmp_and_panic(ca_##functionname##_valid_returnaddrs[ca_loopindx], 0, ==); \
+        FULL_IF_FAILIN (ca_comp(ca_##functionname##_valid_returnaddrs[ca_loopindx], ca_ra, ==)){ \
             break; \
         } \
     } \
-    __cmp_and_panic(ca_loopindx, len(ca_functionname_valid_returnaddrs), >=); \
+    __cmp_and_panic(ca_loopindx, CA_ROP_GET_MAX_RETURNS(functionname), >=); \
  } while(0)
 
 /***************************************************************************
@@ -133,25 +134,28 @@ do { \
  ***************************************************************************/
 
 /**
-    Move variable to an armoured memory space ('ca_secure1').
-*/
+ * @brief Move variable to an armoured memory space ('ca_secure1').
+ */
 #define CA_ATTR_SECURE1 __attribute__((section("ca_secure1")))
 
 /**
-    Lock (prevent all access) to memory space secure1.
-*/
+ * @brief Lock (prevent all access) to memory space secure1.
+ */
 void ca_lock_secure1(void);
 
 /**
-    Unlock (allow all access) to memory space secure1.
-*/
+ * @brief Unlock (allow all access) to memory space secure1.
+ */
 void ca_unlock_secure1(uint32_t unlock_key);
 
 #ifndef MAX_SECURE1_RETURN_LOCS
 #define MAX_SECURE1_RETURN_LOCS 10
 #endif
 
-
+typedef enum {
+    BOARD_FAMILY_MSPM0L2228 = 0,
+    BOARD_FAMILY_UNKNOWN = 0xFFFFFFFF
+} board_family_t;
 
 /***************************************************************************
  System functions/macros
@@ -159,10 +163,15 @@ void ca_unlock_secure1(uint32_t unlock_key);
 
 /**
  * @brief Setup MPU to armour memory spaces, init RNG if possible, etc.
+ * 
+ * @param board_family The family of the board being used, to apply the correct initializations.
+ * 
  * @note Use `init_mpu()` from `mspm0l2228_mpu_config/mpu.h` to set up the MPU 
  * with the desired memory protections for the MSPM0L2228 board.
+ * @note Use the `board_family_t` enum to specify the board family, which allows for different 
+ * initializations based on the specific hardware being used.
 */
-void ca_init(void);
+void ca_init(board_family_t board_family);
 
 
 /***************************************************************************

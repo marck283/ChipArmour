@@ -1,0 +1,313 @@
+\doxysection{Panic }
+\hypertarget{group__panic}{}\label{group__panic}\index{Panic@{Panic}}
+
+
+Panic routines for handling critical errors.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_gad70876964489703bd64aafa511c3bb11}{IF\+\_\+\+FAILIN}}(cond)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga66bbc2da64e6e9e6752e9c6ca83c4286}{IF\+\_\+\+FAILOUT}}(cond)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga853c710cc0f49c085c16b24b1eeea4cd}{FULL\+\_\+\+IF\+\_\+\+FAILIN}}(cond)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga7849bbe16634d2e398a8f5e741df9d91}{FULL\+\_\+\+IF\+\_\+\+FAILOUT}}(cond)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga32cfcc6aa4e57b7ff321e3a08013d1c5}{FOR\+\_\+\+FAILOUT}}(init,  cond,  incr)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_gae87cf746ae8ed8845c299d0e6691d63e}{FOR\+\_\+\+FAILIN}}(init,  cond,  incr)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga0aee7c64c45b77012b98b5254ca2feb6}{FULL\+\_\+\+FOR\+\_\+\+FAILOUT}}(init,  cond,  incr)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga9a0a58866624ee5ce58ccb88922723fe}{FULL\+\_\+\+FOR\+\_\+\+FAILIN}}(init,  cond,  incr)
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga9dc35f4399258ab953c2e885bbe6ef62}{FEED7431}}~0x\+FEED7431
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga02b324b092c1516aca95e2375b0090a9}{FLASH\+\_\+55\+A88519}}~0x55\+A88519
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}{ca\+\_\+panic}}()
+\begin{DoxyCompactList}\small\item\em Trigger a panic due to a critical error. This macro sets a panic flag and then handles the error by looping indefinitely. It should be used in situations where the system cannot safely continue execution, such as after detecting a fault injection attempt or other critical error. The macro ensures that the panic flag is set before entering the panic handler, which will halt the system in a safe state. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga268cc9591e2c3c1af1a627ea5530086f}{ca\+\_\+comp}}(x,  y,  op)
+\begin{DoxyCompactList}\small\item\em Compares two values. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga932353a52e15f104baecf24eb01f84ec}{ca\+\_\+false}}()
+\item 
+\+\#define \doxymbox{\hyperlink{group__panic_gad408d986052b18ccea94fca37d99013b}{\+\_\+\+\_\+cmp\+\_\+and\+\_\+panic}}(x,  y,  op)
+\begin{DoxyCompactList}\small\item\em Compares two values and triggers a panic if the comparison fails. This macro is used to enforce critical checks in the code, ensuring that certain conditions are met. If the comparison fails, it indicates a potential fault or unexpected state, and the system will enter a panic state to prevent further execution. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__panic_ga8e62dc43e9d9174c523cafb0c748e60b}{ca\+\_\+landmine}}()
+\begin{DoxyCompactList}\small\item\em Panics if one of three comparisons fail. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+Noreturn void \doxymbox{\hyperlink{group__panic_gad098f3c229e350557f8bf38f1e680ab4}{\+\_\+ca\+\_\+fullpanic}} (void)
+\begin{DoxyCompactList}\small\item\em Handle any critical error. This function must be called through the {\ttfamily \doxylink{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}{ca\+\_\+panic()}} macro, which sets a panic flag and then calls this function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static volatile uint32\+\_\+t \doxymbox{\hyperlink{group__panic_gaa21782fe97227f239fa7c8d7275b4969}{\+\_\+ca\+\_\+panicflag}} = 0
+\item 
+static volatile uint32\+\_\+t \doxymbox{\hyperlink{group__panic_ga5ac6592f59497defa4c720a6e2e54dcb}{\+\_\+ca\+\_\+sram\+\_\+\+FEED7431}} = 0x\+FEED7431
+\item 
+static const volatile uint32\+\_\+t \doxymbox{\hyperlink{group__panic_ga82f608e0b69d661be6d2d1b025ebfee2}{\+\_\+ca\+\_\+flash\+\_\+55\+A88519}} = 0x55\+A88519
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Panic routines for handling critical errors. 
+
+
+
+\label{group__panic_doc-define-members}
+\Hypertarget{group__panic_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__panic_gad408d986052b18ccea94fca37d99013b}\index{Panic@{Panic}!\_\_cmp\_and\_panic@{\_\_cmp\_and\_panic}}
+\index{\_\_cmp\_and\_panic@{\_\_cmp\_and\_panic}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{\_\_cmp\_and\_panic}{\_\_cmp\_and\_panic}}
+{\footnotesize\ttfamily \label{group__panic_gad408d986052b18ccea94fca37d99013b} 
+\+\#define \+\_\+\+\_\+cmp\+\_\+and\+\_\+panic(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{op}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ FULL\_IF\_FAILIN\ (\doxymbox{\hyperlink{group__panic_ga268cc9591e2c3c1af1a627ea5530086f}{ca\_comp}}(x,\ y,\ op))\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ca\_panic();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \(\backslash\)}
+\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Compares two values and triggers a panic if the comparison fails. This macro is used to enforce critical checks in the code, ensuring that certain conditions are met. If the comparison fails, it indicates a potential fault or unexpected state, and the system will enter a panic state to prevent further execution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The first value to compare. \\
+\hline
+{\em y} & The second value to compare. \\
+\hline
+{\em op} & The comparison operator (e.\+g., ==, !=, \texorpdfstring{$<$}{<}, \texorpdfstring{$>$}{>}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This macro should be used for critical checks where failure indicates a serious issue that cannot be safely recovered from. It is intended to catch programming errors, unexpected states, or potential fault injection 
+\end{DoxyNote}
+\Hypertarget{group__panic_ga268cc9591e2c3c1af1a627ea5530086f}\index{Panic@{Panic}!ca\_comp@{ca\_comp}}
+\index{ca\_comp@{ca\_comp}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{ca\_comp}{ca\_comp}}
+{\footnotesize\ttfamily \label{group__panic_ga268cc9591e2c3c1af1a627ea5530086f} 
+\+\#define ca\+\_\+comp(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{op}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((x)\ op\ (y))}
+
+\end{DoxyCode}
+
+
+Compares two values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The first value to compare. \\
+\hline
+{\em y} & The second value to compare. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__panic_ga932353a52e15f104baecf24eb01f84ec}\index{Panic@{Panic}!ca\_false@{ca\_false}}
+\index{ca\_false@{ca\_false}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{ca\_false}{ca\_false}}
+{\footnotesize\ttfamily \label{group__panic_ga932353a52e15f104baecf24eb01f84ec} 
+\+\#define ca\+\_\+false(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__panic_ga268cc9591e2c3c1af1a627ea5530086f}{ca\_comp}}(\doxymbox{\hyperlink{group__panic_ga5ac6592f59497defa4c720a6e2e54dcb}{\_ca\_sram\_FEED7431}},\ 0xFE000000,\ ==)}
+
+\end{DoxyCode}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\doxymbox{\hyperlink{deprecated__deprecated000001}{Deprecated}}]Unused in both this fork and in the original upstream source (\href{https://github.com/newaetech/ChipArmour}{\texttt{https:\+/\+/\+github.\+com/\+newaetech/\+\+Chip\+Armour}}). Do not rely on this macro, as the origin and intended purpose of 0x\+FE000000 could not be determined during security review. \end{DoxyRefDesc}
+\Hypertarget{group__panic_ga8e62dc43e9d9174c523cafb0c748e60b}\index{Panic@{Panic}!ca\_landmine@{ca\_landmine}}
+\index{ca\_landmine@{ca\_landmine}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{ca\_landmine}{ca\_landmine}}
+{\footnotesize\ttfamily \label{group__panic_ga8e62dc43e9d9174c523cafb0c748e60b} 
+\+\#define ca\+\_\+landmine(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \_\_cmp\_and\_panic(\doxymbox{\hyperlink{group__panic_ga5ac6592f59497defa4c720a6e2e54dcb}{\_ca\_sram\_FEED7431}},\ \doxymbox{\hyperlink{group__panic_ga9dc35f4399258ab953c2e885bbe6ef62}{FEED7431}},\ !=);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \_\_cmp\_and\_panic(\doxymbox{\hyperlink{group__panic_ga82f608e0b69d661be6d2d1b025ebfee2}{\_ca\_flash\_55A88519}},\ \doxymbox{\hyperlink{group__panic_ga02b324b092c1516aca95e2375b0090a9}{FLASH\_55A88519}},\ !=);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \_\_cmp\_and\_panic(\doxymbox{\hyperlink{group__panic_ga5ac6592f59497defa4c720a6e2e54dcb}{\_ca\_sram\_FEED7431}},\ \doxymbox{\hyperlink{group__panic_ga82f608e0b69d661be6d2d1b025ebfee2}{\_ca\_flash\_55A88519}},\ ==);\ \(\backslash\)}
+\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Panics if one of three comparisons fail. 
+
+\Hypertarget{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}\index{Panic@{Panic}!ca\_panic@{ca\_panic}}
+\index{ca\_panic@{ca\_panic}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{ca\_panic}{ca\_panic}}
+{\footnotesize\ttfamily \label{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682} 
+\+\#define ca\+\_\+panic(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{group__panic_gaa21782fe97227f239fa7c8d7275b4969}{\_ca\_panicflag}}++;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \_ca\_fullpanic();\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ while(1);\ \(\backslash\)}
+\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Trigger a panic due to a critical error. This macro sets a panic flag and then handles the error by looping indefinitely. It should be used in situations where the system cannot safely continue execution, such as after detecting a fault injection attempt or other critical error. The macro ensures that the panic flag is set before entering the panic handler, which will halt the system in a safe state. 
+
+\Hypertarget{group__panic_ga9dc35f4399258ab953c2e885bbe6ef62}\index{Panic@{Panic}!FEED7431@{FEED7431}}
+\index{FEED7431@{FEED7431}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FEED7431}{FEED7431}}
+{\footnotesize\ttfamily \label{group__panic_ga9dc35f4399258ab953c2e885bbe6ef62} 
+\+\#define FEED7431~0x\+FEED7431}
+
+Feed7431 flag \Hypertarget{group__panic_ga02b324b092c1516aca95e2375b0090a9}\index{Panic@{Panic}!FLASH\_55A88519@{FLASH\_55A88519}}
+\index{FLASH\_55A88519@{FLASH\_55A88519}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FLASH\_55A88519}{FLASH\_55A88519}}
+{\footnotesize\ttfamily \label{group__panic_ga02b324b092c1516aca95e2375b0090a9} 
+\+\#define FLASH\+\_\+55\+A88519~0x55\+A88519}
+
+Flash flag \Hypertarget{group__panic_gae87cf746ae8ed8845c299d0e6691d63e}\index{Panic@{Panic}!FOR\_FAILIN@{FOR\_FAILIN}}
+\index{FOR\_FAILIN@{FOR\_FAILIN}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FOR\_FAILIN}{FOR\_FAILIN}}
+{\footnotesize\ttfamily \label{group__panic_gae87cf746ae8ed8845c299d0e6691d63e} 
+\+\#define FOR\+\_\+\+FAILIN(\begin{DoxyParamCaption}\item[{}]{init}{, }\item[{}]{cond}{, }\item[{}]{incr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (init;\ (cond)\ ||\ (cond)\ ||\ (cond);\ incr)}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_ga32cfcc6aa4e57b7ff321e3a08013d1c5}\index{Panic@{Panic}!FOR\_FAILOUT@{FOR\_FAILOUT}}
+\index{FOR\_FAILOUT@{FOR\_FAILOUT}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FOR\_FAILOUT}{FOR\_FAILOUT}}
+{\footnotesize\ttfamily \label{group__panic_ga32cfcc6aa4e57b7ff321e3a08013d1c5} 
+\+\#define FOR\+\_\+\+FAILOUT(\begin{DoxyParamCaption}\item[{}]{init}{, }\item[{}]{cond}{, }\item[{}]{incr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (init;\ (cond)\ \&\&\ (cond)\ \&\&\ (cond);\ incr)}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_ga9a0a58866624ee5ce58ccb88922723fe}\index{Panic@{Panic}!FULL\_FOR\_FAILIN@{FULL\_FOR\_FAILIN}}
+\index{FULL\_FOR\_FAILIN@{FULL\_FOR\_FAILIN}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FULL\_FOR\_FAILIN}{FULL\_FOR\_FAILIN}}
+{\footnotesize\ttfamily \label{group__panic_ga9a0a58866624ee5ce58ccb88922723fe} 
+\+\#define FULL\+\_\+\+FOR\+\_\+\+FAILIN(\begin{DoxyParamCaption}\item[{}]{init}{, }\item[{}]{cond}{, }\item[{}]{incr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (init;\ (cond)\ |\ (cond)\ |\ (cond);\ incr)}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_ga0aee7c64c45b77012b98b5254ca2feb6}\index{Panic@{Panic}!FULL\_FOR\_FAILOUT@{FULL\_FOR\_FAILOUT}}
+\index{FULL\_FOR\_FAILOUT@{FULL\_FOR\_FAILOUT}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FULL\_FOR\_FAILOUT}{FULL\_FOR\_FAILOUT}}
+{\footnotesize\ttfamily \label{group__panic_ga0aee7c64c45b77012b98b5254ca2feb6} 
+\+\#define FULL\+\_\+\+FOR\+\_\+\+FAILOUT(\begin{DoxyParamCaption}\item[{}]{init}{, }\item[{}]{cond}{, }\item[{}]{incr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (init;\ (cond)\ \&\ (cond)\ \&\ (cond);\ incr)}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_ga853c710cc0f49c085c16b24b1eeea4cd}\index{Panic@{Panic}!FULL\_IF\_FAILIN@{FULL\_IF\_FAILIN}}
+\index{FULL\_IF\_FAILIN@{FULL\_IF\_FAILIN}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FULL\_IF\_FAILIN}{FULL\_IF\_FAILIN}}
+{\footnotesize\ttfamily \label{group__panic_ga853c710cc0f49c085c16b24b1eeea4cd} 
+\+\#define FULL\+\_\+\+IF\+\_\+\+FAILIN(\begin{DoxyParamCaption}\item[{}]{cond}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ ((cond)\ |\ (cond)\ |\ (cond))}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_ga7849bbe16634d2e398a8f5e741df9d91}\index{Panic@{Panic}!FULL\_IF\_FAILOUT@{FULL\_IF\_FAILOUT}}
+\index{FULL\_IF\_FAILOUT@{FULL\_IF\_FAILOUT}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{FULL\_IF\_FAILOUT}{FULL\_IF\_FAILOUT}}
+{\footnotesize\ttfamily \label{group__panic_ga7849bbe16634d2e398a8f5e741df9d91} 
+\+\#define FULL\+\_\+\+IF\+\_\+\+FAILOUT(\begin{DoxyParamCaption}\item[{}]{cond}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ ((cond)\ \&\ (cond)\ \&\ (cond))}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_gad70876964489703bd64aafa511c3bb11}\index{Panic@{Panic}!IF\_FAILIN@{IF\_FAILIN}}
+\index{IF\_FAILIN@{IF\_FAILIN}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{IF\_FAILIN}{IF\_FAILIN}}
+{\footnotesize\ttfamily \label{group__panic_gad70876964489703bd64aafa511c3bb11} 
+\+\#define IF\+\_\+\+FAILIN(\begin{DoxyParamCaption}\item[{}]{cond}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ ((cond)\ ||\ (cond)\ ||\ (cond))}
+
+\end{DoxyCode}
+\Hypertarget{group__panic_ga66bbc2da64e6e9e6752e9c6ca83c4286}\index{Panic@{Panic}!IF\_FAILOUT@{IF\_FAILOUT}}
+\index{IF\_FAILOUT@{IF\_FAILOUT}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{IF\_FAILOUT}{IF\_FAILOUT}}
+{\footnotesize\ttfamily \label{group__panic_ga66bbc2da64e6e9e6752e9c6ca83c4286} 
+\+\#define IF\+\_\+\+FAILOUT(\begin{DoxyParamCaption}\item[{}]{cond}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ ((cond)\ \&\&\ (cond)\ \&\&\ (cond))}
+
+\end{DoxyCode}
+
+
+\label{group__panic_doc-func-members}
+\Hypertarget{group__panic_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__panic_gad098f3c229e350557f8bf38f1e680ab4}\index{Panic@{Panic}!\_ca\_fullpanic@{\_ca\_fullpanic}}
+\index{\_ca\_fullpanic@{\_ca\_fullpanic}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{\_ca\_fullpanic()}{\_ca\_fullpanic()}}
+{\footnotesize\ttfamily \label{group__panic_gad098f3c229e350557f8bf38f1e680ab4} 
+\+\_\+\+Noreturn void \+\_\+ca\+\_\+fullpanic (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Handle any critical error. This function must be called through the {\ttfamily \doxylink{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}{ca\+\_\+panic()}} macro, which sets a panic flag and then calls this function. 
+
+\begin{DoxyNote}{Note}
+This function should never return and is designed to halt the system in a safe state. It can be used to catch any critical errors or unexpected conditions that occur during execution, such as invalid memory access, failed integrity checks, or other unrecoverable errors. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function will enter an infinite loop, effectively halting the system. It should only be used in situations where recovery is not possible or safe, and it should be called through the {\ttfamily \doxylink{group__panic_ga7c4c25b7ebc9ea9aae05a3b998856682}{ca\+\_\+panic()}} macro to ensure the panic flag is set correctly. 
+\end{DoxyWarning}
+
+
+\label{group__panic_doc-var-members}
+\Hypertarget{group__panic_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__panic_ga82f608e0b69d661be6d2d1b025ebfee2}\index{Panic@{Panic}!\_ca\_flash\_55A88519@{\_ca\_flash\_55A88519}}
+\index{\_ca\_flash\_55A88519@{\_ca\_flash\_55A88519}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{\_ca\_flash\_55A88519}{\_ca\_flash\_55A88519}}
+{\footnotesize\ttfamily \label{group__panic_ga82f608e0b69d661be6d2d1b025ebfee2} 
+const volatile uint32\+\_\+t \+\_\+ca\+\_\+flash\+\_\+55\+A88519 = 0x55\+A88519\hspace{0.3cm}{\ttfamily [static]}}
+
+Flash flag Flash flag to detect tampering or fault injection attempts \Hypertarget{group__panic_gaa21782fe97227f239fa7c8d7275b4969}\index{Panic@{Panic}!\_ca\_panicflag@{\_ca\_panicflag}}
+\index{\_ca\_panicflag@{\_ca\_panicflag}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{\_ca\_panicflag}{\_ca\_panicflag}}
+{\footnotesize\ttfamily \label{group__panic_gaa21782fe97227f239fa7c8d7275b4969} 
+volatile uint32\+\_\+t \+\_\+ca\+\_\+panicflag = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+These flags are stored in RAM right now. You might want to store them in flash or some other non-\/volatile memory depending on your use case. The important thing is that they are stored in a way that makes it difficult for an attacker to tamper with them without causing a crash or other detectable failure. Panic flag to indicate a critical error \Hypertarget{group__panic_ga5ac6592f59497defa4c720a6e2e54dcb}\index{Panic@{Panic}!\_ca\_sram\_FEED7431@{\_ca\_sram\_FEED7431}}
+\index{\_ca\_sram\_FEED7431@{\_ca\_sram\_FEED7431}!Panic@{Panic}}
+\doxysubsubsection{\texorpdfstring{\_ca\_sram\_FEED7431}{\_ca\_sram\_FEED7431}}
+{\footnotesize\ttfamily \label{group__panic_ga5ac6592f59497defa4c720a6e2e54dcb} 
+volatile uint32\+\_\+t \+\_\+ca\+\_\+sram\+\_\+\+FEED7431 = 0x\+FEED7431\hspace{0.3cm}{\ttfamily [static]}}
+
+Feed7431 flag SRAM flag to detect tampering or fault injection attempts 

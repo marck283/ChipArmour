@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['panic_0',['Panic',['../db/d12/group__panic.html',1,'']]]
+  ['mpu_20configuration_0',['MPU configuration',['../group__MSPM0L2228__MPU.html',1,'']]]
 ];

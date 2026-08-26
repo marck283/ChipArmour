@@ -1,0 +1,70 @@
+\doxysection{random.\+h}
+\hypertarget{random_8h_source}{}\label{random_8h_source}\index{inc/random.h@{inc/random.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RANDOM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RANDOM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ UINT\_TYPE(bitsize)\ uint\#\#bitsize\#\#\_t\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{inline}\ uint32\_t\ u32\_min(uint32\_t\ a,\ uint32\_t\ b)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{return}\ (a\ <\ b)\ ?\ a\ :\ b;}
+\DoxyCodeLine{00016\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00024\ \_\_always\_inline}
+\DoxyCodeLine{00025\ \textcolor{keyword}{inline}\ uint32\_t\ u32\_ceil(uint32\_t\ a,\ uint32\_t\ b)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ (a\ /\ b)\ +\ (uint32\_t)\ ((a\ \%\ b)\ !=\ 0);}
+\DoxyCodeLine{00027\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ RET\_OK\ =\ 0,\ }
+\DoxyCodeLine{00034\ \ \ \ \ RET\_ERR\ =\ -\/1\ }
+\DoxyCodeLine{00035\ \}\ ret\_t;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ random\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00050\ ret\_t\ random(UINT\_TYPE(8)*\ buf,\ UINT\_TYPE(32)\ len,\ UINT\_TYPE(8)\ upper\_bound);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ UINT\_TYPE(64)\ \_random\_uint\_impl\_64(UINT\_TYPE(64)\ upper\_bound)}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ UINT\_TYPE(64)\ result\ =\ 0;}
+\DoxyCodeLine{00059\ \ \ \ \ UINT\_TYPE(64)\ random\_err\ =\ RET\_ERR;}
+\DoxyCodeLine{00060\ \ \ \ \ random\_err\ =\ random((UINT\_TYPE(8)*)\ \&result,\ sizeof(result),\ (UINT\_TYPE(8))((upper\_bound)\ -\/\ 1));}
+\DoxyCodeLine{00061\ \ \ \ \ \doxymbox{\hyperlink{group__panic_gad408d986052b18ccea94fca37d99013b}{\_\_cmp\_and\_panic}}(random\_err,\ RET\_OK,\ !=);}
+\DoxyCodeLine{00062\ \ \ \ \ return\ result;}
+\DoxyCodeLine{00063\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ static\ inline\ UINT\_TYPE(32)\ \_random\_uint\_impl\_32(UINT\_TYPE(32)\ upper\_bound)}
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ UINT\_TYPE(32)\ result\ =\ 0;}
+\DoxyCodeLine{00068\ \ \ \ \ UINT\_TYPE(32)\ random\_err\ =\ RET\_ERR;}
+\DoxyCodeLine{00069\ \ \ \ \ random\_err\ =\ random((UINT\_TYPE(8)*)\ \&result,\ sizeof(result),\ (UINT\_TYPE(8))((upper\_bound)\ -\/\ 1));}
+\DoxyCodeLine{00070\ \ \ \ \ \doxymbox{\hyperlink{group__panic_gad408d986052b18ccea94fca37d99013b}{\_\_cmp\_and\_panic}}(random\_err,\ RET\_OK,\ !=);}
+\DoxyCodeLine{00071\ \ \ \ \ return\ result;}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ static\ inline\ UINT\_TYPE(16)\ \_random\_uint\_impl\_16(UINT\_TYPE(16)\ upper\_bound)}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ UINT\_TYPE(16)\ result\ =\ 0;}
+\DoxyCodeLine{00077\ \ \ \ \ UINT\_TYPE(16)\ random\_err\ =\ RET\_ERR;}
+\DoxyCodeLine{00078\ \ \ \ \ random\_err\ =\ random((UINT\_TYPE(8)*)\ \&result,\ sizeof(result),\ (UINT\_TYPE(8))((upper\_bound)\ -\/\ 1));}
+\DoxyCodeLine{00079\ \ \ \ \ \doxymbox{\hyperlink{group__panic_gad408d986052b18ccea94fca37d99013b}{\_\_cmp\_and\_panic}}(random\_err,\ RET\_OK,\ !=);}
+\DoxyCodeLine{00080\ \ \ \ \ return\ result;}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ static\ inline\ UINT\_TYPE(8)\ \_random\_uint\_impl\_8(UINT\_TYPE(8)\ upper\_bound)}
+\DoxyCodeLine{00084\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ UINT\_TYPE(8)\ result\ =\ 0;}
+\DoxyCodeLine{00086\ \ \ \ \ UINT\_TYPE(8)\ random\_err\ =\ RET\_ERR;}
+\DoxyCodeLine{00087\ \ \ \ \ random\_err\ =\ random((UINT\_TYPE(8)*)\ \&result,\ sizeof(result),\ (UINT\_TYPE(8))((upper\_bound)\ -\/\ 1));}
+\DoxyCodeLine{00088\ \ \ \ \ \doxymbox{\hyperlink{group__panic_gad408d986052b18ccea94fca37d99013b}{\_\_cmp\_and\_panic}}(random\_err,\ RET\_OK,\ !=);}
+\DoxyCodeLine{00089\ \ \ \ \ return\ result;}
+\DoxyCodeLine{00090\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ RANDOM\_UINT(bitsize,\ upper\_bound)\ \_random\_uint\_impl\_\#\#bitsize((upper\_bound))}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

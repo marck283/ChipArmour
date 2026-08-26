@@ -1,0 +1,99 @@
+\doxysection{mpu\+\_\+region\+\_\+t Struct Reference}
+\hypertarget{structmpu__region__t}{}\label{structmpu__region__t}\index{mpu\_region\_t@{mpu\_region\_t}}
+
+
+Configuration structure for an MPU region, including its number, base address, access type, permissions, size, execution disable flag, cache policies, and shareability.  
+
+
+
+
+{\ttfamily \+\#include $<$mpu.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_ac5c0d8a928600a340c47e6c4208475f0}{region\+\_\+num}}
+\item 
+const uintptr\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_a6ae466678e074c70f88ea6e8e604afa0}{base\+\_\+addr}}
+\item 
+const mpu\+\_\+access\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_a2a3d2dc8b99da7850404062254524900}{access\+\_\+type}}
+\item 
+const uint8\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_ae05ae9255f5ba3fbf64c1193166b0b27}{ap}}
+\item 
+const uint8\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_a1e2ec2ebb1136e9b95a99ef19b70e85d}{region\+\_\+size}}
+\item 
+const uint8\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_a5287614a1b611215c5c50923c76a013f}{disable\+\_\+exec}}
+\item 
+const uint32\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_a938c50105d76e8132b94fdf68862154e}{outer\+\_\+cp}}
+\item 
+const uint32\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_ab3d5e689d7eecf14b7781ef811957185}{inner\+\_\+cp}}
+\item 
+const uint32\+\_\+t \doxymbox{\hyperlink{structmpu__region__t_a8f8fc93fb492dce493bbbc8cb92c7745}{shareable}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuration structure for an MPU region, including its number, base address, access type, permissions, size, execution disable flag, cache policies, and shareability. 
+
+\label{structmpu__region__t_doc-variable-members}
+\Hypertarget{structmpu__region__t_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmpu__region__t_a2a3d2dc8b99da7850404062254524900}\index{mpu\_region\_t@{mpu\_region\_t}!access\_type@{access\_type}}
+\index{access\_type@{access\_type}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{access\_type}{access\_type}}
+{\footnotesize\ttfamily \label{structmpu__region__t_a2a3d2dc8b99da7850404062254524900} 
+const mpu\+\_\+access\+\_\+t mpu\+\_\+region\+\_\+t::\+access\+\_\+type}
+
+MPU access type \Hypertarget{structmpu__region__t_ae05ae9255f5ba3fbf64c1193166b0b27}\index{mpu\_region\_t@{mpu\_region\_t}!ap@{ap}}
+\index{ap@{ap}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{ap}{ap}}
+{\footnotesize\ttfamily \label{structmpu__region__t_ae05ae9255f5ba3fbf64c1193166b0b27} 
+const uint8\+\_\+t mpu\+\_\+region\+\_\+t::\+ap}
+
+Access permissions \Hypertarget{structmpu__region__t_a6ae466678e074c70f88ea6e8e604afa0}\index{mpu\_region\_t@{mpu\_region\_t}!base\_addr@{base\_addr}}
+\index{base\_addr@{base\_addr}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{base\_addr}{base\_addr}}
+{\footnotesize\ttfamily \label{structmpu__region__t_a6ae466678e074c70f88ea6e8e604afa0} 
+const uintptr\+\_\+t mpu\+\_\+region\+\_\+t::\+base\+\_\+addr}
+
+Region base address \Hypertarget{structmpu__region__t_a5287614a1b611215c5c50923c76a013f}\index{mpu\_region\_t@{mpu\_region\_t}!disable\_exec@{disable\_exec}}
+\index{disable\_exec@{disable\_exec}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{disable\_exec}{disable\_exec}}
+{\footnotesize\ttfamily \label{structmpu__region__t_a5287614a1b611215c5c50923c76a013f} 
+const uint8\+\_\+t mpu\+\_\+region\+\_\+t::\+disable\+\_\+exec}
+
+Disable instruction execution (NX bit) \Hypertarget{structmpu__region__t_ab3d5e689d7eecf14b7781ef811957185}\index{mpu\_region\_t@{mpu\_region\_t}!inner\_cp@{inner\_cp}}
+\index{inner\_cp@{inner\_cp}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{inner\_cp}{inner\_cp}}
+{\footnotesize\ttfamily \label{structmpu__region__t_ab3d5e689d7eecf14b7781ef811957185} 
+const uint32\+\_\+t mpu\+\_\+region\+\_\+t::\+inner\+\_\+cp}
+
+Inner cache policy \Hypertarget{structmpu__region__t_a938c50105d76e8132b94fdf68862154e}\index{mpu\_region\_t@{mpu\_region\_t}!outer\_cp@{outer\_cp}}
+\index{outer\_cp@{outer\_cp}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{outer\_cp}{outer\_cp}}
+{\footnotesize\ttfamily \label{structmpu__region__t_a938c50105d76e8132b94fdf68862154e} 
+const uint32\+\_\+t mpu\+\_\+region\+\_\+t::\+outer\+\_\+cp}
+
+Outer cache policy \Hypertarget{structmpu__region__t_ac5c0d8a928600a340c47e6c4208475f0}\index{mpu\_region\_t@{mpu\_region\_t}!region\_num@{region\_num}}
+\index{region\_num@{region\_num}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{region\_num}{region\_num}}
+{\footnotesize\ttfamily \label{structmpu__region__t_ac5c0d8a928600a340c47e6c4208475f0} 
+const uint8\+\_\+t mpu\+\_\+region\+\_\+t::\+region\+\_\+num}
+
+Region number (1-\/7) \Hypertarget{structmpu__region__t_a1e2ec2ebb1136e9b95a99ef19b70e85d}\index{mpu\_region\_t@{mpu\_region\_t}!region\_size@{region\_size}}
+\index{region\_size@{region\_size}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{region\_size}{region\_size}}
+{\footnotesize\ttfamily \label{structmpu__region__t_a1e2ec2ebb1136e9b95a99ef19b70e85d} 
+const uint8\+\_\+t mpu\+\_\+region\+\_\+t::\+region\+\_\+size}
+
+Region size \Hypertarget{structmpu__region__t_a8f8fc93fb492dce493bbbc8cb92c7745}\index{mpu\_region\_t@{mpu\_region\_t}!shareable@{shareable}}
+\index{shareable@{shareable}!mpu\_region\_t@{mpu\_region\_t}}
+\doxysubsubsection{\texorpdfstring{shareable}{shareable}}
+{\footnotesize\ttfamily \label{structmpu__region__t_a8f8fc93fb492dce493bbbc8cb92c7745} 
+const uint32\+\_\+t mpu\+\_\+region\+\_\+t::\+shareable}
+
+Shareable attribute 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+inc/\+mspm0l2228/\+mspm0l2228\+\_\+mpu\+\_\+config/\+mpu.\+h\end{DoxyCompactItemize}

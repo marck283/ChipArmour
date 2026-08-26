@@ -1,0 +1,321 @@
+\doxysection{Chip\+Armour Return Unsigned Integer structures and functions }
+\hypertarget{group__ca__ret__uint}{}\label{group__ca__ret__uint}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+
+
+Structures and functions to return uint values with fault injection armouring.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em uint64\+\_\+t returned by ca\+\_\+ret\+\_\+N functions, must be passed to comparison functions. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em uint32\+\_\+t returned by ca\+\_\+ret\+\_\+N functions, must be passed to comparison functions. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em uint16\+\_\+t returned by ca\+\_\+ret\+\_\+N functions, must be passed to comparison functions. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em uint8\+\_\+t returned by ca\+\_\+ret\+\_\+N functions, must be passed to comparison functions. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__ret__u64__state__t}{ca\+\_\+ret\+\_\+u64\+\_\+state\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em State struct for \+\_\+ca\+\_\+ret\+\_\+u64 to assist with FI armouring. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__ret__u32__state__t}{ca\+\_\+ret\+\_\+u32\+\_\+state\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em State struct for \+\_\+ca\+\_\+ret\+\_\+u32 to assist with FI armouring. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__ret__u16__state__t}{ca\+\_\+ret\+\_\+u16\+\_\+state\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em State struct for \+\_\+ca\+\_\+ret\+\_\+u16 to assist with FI armouring. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structca__ret__u8__state__t}{ca\+\_\+ret\+\_\+u8\+\_\+state\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em State struct for \+\_\+ca\+\_\+ret\+\_\+u8 to assist with FI armouring. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370}{CA\+\_\+\+RET\+\_\+\+UINT}}(value,  magic,  maxdelay)
+\begin{DoxyCompactList}\small\item\em Returns an unsigned integer of the same type as {\ttfamily value}, but adds armour around the return function to catch fault injection attempts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_gac6b33333b59049a12f2035a4d749ecf5}{\+\_\+ca\+\_\+ret\+\_\+u64}} (\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}} value, \doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}} magic, uint64\+\_\+t maxdelay)
+\begin{DoxyCompactList}\small\item\em Returns an unsigned 64-\/bit value, but adds armour around the return function to catch fault injection attempts. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_ga0869506317ac4ffdbf307c460e7d0b98}{ca\+\_\+retfast\+\_\+u64}} (uint64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Returns a 64-\/bit unsigned int, but after a random delay to assist with FI armouring. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_ga262965444d096ba10a000fc89fed7476}{\+\_\+ca\+\_\+ret\+\_\+u32}} (\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}} value, \doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}} magic, uint32\+\_\+t maxdelay)
+\begin{DoxyCompactList}\small\item\em Returns an unsigned 32-\/bit value, but adds armour around the return function to catch fault injection attempts. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_gaa4d5912aad81523cd5433b94058d1522}{ca\+\_\+retfast\+\_\+u32}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Returns a 32-\/bit unsigned int, but after a random delay to assist with FI armouring. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_ga0e96b3bfb87e51787574343be24c45ca}{\+\_\+ca\+\_\+ret\+\_\+u16}} (\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}} value, \doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}} magic, uint16\+\_\+t maxdelay)
+\begin{DoxyCompactList}\small\item\em Returns an unsigned 16-\/bit value, but adds armour around the return function to catch fault injection attempts. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_ga160a5300aaba3df9329f563c66058f24}{ca\+\_\+retfast\+\_\+u16}} (uint16\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Returns a 16-\/bit unsigned int, but after a random delay to assist with FI armouring. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_ga2cebd18da014c411b2b24349869b1228}{\+\_\+ca\+\_\+ret\+\_\+u8}} (\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}} value, \doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}} magic, uint8\+\_\+t maxdelay)
+\begin{DoxyCompactList}\small\item\em Returns an unsigned 8-\/bit value, but adds armour around the return function to catch fault injection attempts. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}} \doxymbox{\hyperlink{group__ca__ret__uint_ga9631c37319620809d70790b91b347f3c}{ca\+\_\+retfast\+\_\+u8}} (uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Returns an 8-\/bit unsigned int, but after a random delay to assist with FI armouring. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structures and functions to return uint values with fault injection armouring. 
+
+
+
+\label{group__ca__ret__uint_doc-define-members}
+\Hypertarget{group__ca__ret__uint_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!CA\_RET\_UINT@{CA\_RET\_UINT}}
+\index{CA\_RET\_UINT@{CA\_RET\_UINT}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{CA\_RET\_UINT}{CA\_RET\_UINT}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370} 
+\+\#define CA\+\_\+\+RET\+\_\+\+UINT(\begin{DoxyParamCaption}\item[{}]{value}{, }\item[{}]{magic}{, }\item[{}]{maxdelay}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \_Generic((value),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CA\_UINT\_TYPE(32):\ \doxymbox{\hyperlink{group__ca__ret__uint_ga262965444d096ba10a000fc89fed7476}{\_ca\_ret\_u32}}(\doxymbox{\hyperlink{group__ca__ret__uint_gaa4d5912aad81523cd5433b94058d1522}{ca\_retfast\_u32}}((value)),\ \doxymbox{\hyperlink{group__ca__ret__uint_gaa4d5912aad81523cd5433b94058d1522}{ca\_retfast\_u32}}((magic)),\ (maxdelay)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CA\_UINT\_TYPE(16):\ \doxymbox{\hyperlink{group__ca__ret__uint_ga0e96b3bfb87e51787574343be24c45ca}{\_ca\_ret\_u16}}(\doxymbox{\hyperlink{group__ca__ret__uint_ga160a5300aaba3df9329f563c66058f24}{ca\_retfast\_u16}}((value)),\ \doxymbox{\hyperlink{group__ca__ret__uint_ga160a5300aaba3df9329f563c66058f24}{ca\_retfast\_u16}}((magic)),\ (maxdelay)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ CA\_UINT\_TYPE(8):\ \doxymbox{\hyperlink{group__ca__ret__uint_ga2cebd18da014c411b2b24349869b1228}{\_ca\_ret\_u8}}(\doxymbox{\hyperlink{group__ca__ret__uint_ga9631c37319620809d70790b91b347f3c}{ca\_retfast\_u8}}((value)),\ \doxymbox{\hyperlink{group__ca__ret__uint_ga9631c37319620809d70790b91b347f3c}{ca\_retfast\_u8}}((magic)),\ (maxdelay))\ \(\backslash\)}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+
+
+Returns an unsigned integer of the same type as {\ttfamily value}, but adds armour around the return function to catch fault injection attempts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return, passed as a ca\+\_\+uint\+N\+\_\+t struct with the value and its bitwise inverse for integrity checks. \\
+\hline
+{\em magic} & A magic value for integrity checks. \\
+\hline
+{\em maxdelay} & The maximum delay for the return function. \\
+\hline
+\end{DoxyParams}
+
+
+\label{group__ca__ret__uint_doc-func-members}
+\Hypertarget{group__ca__ret__uint_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__ca__ret__uint_ga0e96b3bfb87e51787574343be24c45ca}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!\_ca\_ret\_u16@{\_ca\_ret\_u16}}
+\index{\_ca\_ret\_u16@{\_ca\_ret\_u16}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{\_ca\_ret\_u16()}{\_ca\_ret\_u16()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga0e96b3bfb87e51787574343be24c45ca} 
+\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}} \+\_\+ca\+\_\+ret\+\_\+u16 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}}}]{magic}{, }\item[{uint16\+\_\+t}]{maxdelay}{}\end{DoxyParamCaption})}
+
+
+
+Returns an unsigned 16-\/bit value, but adds armour around the return function to catch fault injection attempts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return, passed as a \doxylink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t} struct with the value and its bitwise inverse for integrity checks. \\
+\hline
+{\em magic} & A magic value for integrity checks. \\
+\hline
+{\em maxdelay} & The maximum delay for the return function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not for use alone. Please use the {\ttfamily \doxylink{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370}{CA\+\_\+\+RET\+\_\+\+UINT}} macro instead. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em magic} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em maxdelay} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_ga262965444d096ba10a000fc89fed7476}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!\_ca\_ret\_u32@{\_ca\_ret\_u32}}
+\index{\_ca\_ret\_u32@{\_ca\_ret\_u32}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{\_ca\_ret\_u32()}{\_ca\_ret\_u32()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga262965444d096ba10a000fc89fed7476} 
+\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}} \+\_\+ca\+\_\+ret\+\_\+u32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}}}]{magic}{, }\item[{uint32\+\_\+t}]{maxdelay}{}\end{DoxyParamCaption})}
+
+
+
+Returns an unsigned 32-\/bit value, but adds armour around the return function to catch fault injection attempts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return, passed as a \doxylink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t} struct with the value and its bitwise inverse for integrity checks. \\
+\hline
+{\em magic} & A magic value for integrity checks. \\
+\hline
+{\em maxdelay} & The maximum delay for the return function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not for use alone. Please use the {\ttfamily \doxylink{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370}{CA\+\_\+\+RET\+\_\+\+UINT}} macro instead. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em magic} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em maxdelay} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_gac6b33333b59049a12f2035a4d749ecf5}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!\_ca\_ret\_u64@{\_ca\_ret\_u64}}
+\index{\_ca\_ret\_u64@{\_ca\_ret\_u64}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{\_ca\_ret\_u64()}{\_ca\_ret\_u64()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_gac6b33333b59049a12f2035a4d749ecf5} 
+\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}} \+\_\+ca\+\_\+ret\+\_\+u64 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}}}]{magic}{, }\item[{uint64\+\_\+t}]{maxdelay}{}\end{DoxyParamCaption})}
+
+
+
+Returns an unsigned 64-\/bit value, but adds armour around the return function to catch fault injection attempts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return, passed as a \doxylink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t} struct with the value and its bitwise inverse for integrity checks. \\
+\hline
+{\em magic} & A magic value for integrity checks. \\
+\hline
+{\em maxdelay} & The maximum delay for the return function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not for use alone. Please use the {\ttfamily \doxylink{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370}{CA\+\_\+\+RET\+\_\+\+UINT}} macro instead. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em magic} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em maxdelay} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_ga2cebd18da014c411b2b24349869b1228}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!\_ca\_ret\_u8@{\_ca\_ret\_u8}}
+\index{\_ca\_ret\_u8@{\_ca\_ret\_u8}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{\_ca\_ret\_u8()}{\_ca\_ret\_u8()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga2cebd18da014c411b2b24349869b1228} 
+\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}} \+\_\+ca\+\_\+ret\+\_\+u8 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}}}]{magic}{, }\item[{uint8\+\_\+t}]{maxdelay}{}\end{DoxyParamCaption})}
+
+
+
+Returns an unsigned 8-\/bit value, but adds armour around the return function to catch fault injection attempts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return, passed as a \doxylink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t} struct with the value and its bitwise inverse for integrity checks. \\
+\hline
+{\em magic} & A magic value for integrity checks. \\
+\hline
+{\em maxdelay} & The maximum delay for the return function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not for use alone. Please use the {\ttfamily \doxylink{group__ca__ret__uint_ga8d7710bc44affa11c31f449866d45370}{CA\+\_\+\+RET\+\_\+\+UINT}} macro instead. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em magic} & Chip\+Armour type for unsigned integer of specified bit size  \\
+\hline
+{\em maxdelay} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_ga160a5300aaba3df9329f563c66058f24}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!ca\_retfast\_u16@{ca\_retfast\_u16}}
+\index{ca\_retfast\_u16@{ca\_retfast\_u16}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{ca\_retfast\_u16()}{ca\_retfast\_u16()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga160a5300aaba3df9329f563c66058f24} 
+\doxymbox{\hyperlink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t}} ca\+\_\+retfast\+\_\+u16 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Returns a 16-\/bit unsigned int, but after a random delay to assist with FI armouring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint16__t}{ca\+\_\+uint16\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_gaa4d5912aad81523cd5433b94058d1522}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!ca\_retfast\_u32@{ca\_retfast\_u32}}
+\index{ca\_retfast\_u32@{ca\_retfast\_u32}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{ca\_retfast\_u32()}{ca\_retfast\_u32()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_gaa4d5912aad81523cd5433b94058d1522} 
+\doxymbox{\hyperlink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t}} ca\+\_\+retfast\+\_\+u32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Returns a 32-\/bit unsigned int, but after a random delay to assist with FI armouring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint32__t}{ca\+\_\+uint32\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_ga0869506317ac4ffdbf307c460e7d0b98}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!ca\_retfast\_u64@{ca\_retfast\_u64}}
+\index{ca\_retfast\_u64@{ca\_retfast\_u64}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{ca\_retfast\_u64()}{ca\_retfast\_u64()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga0869506317ac4ffdbf307c460e7d0b98} 
+\doxymbox{\hyperlink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t}} ca\+\_\+retfast\+\_\+u64 (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Returns a 64-\/bit unsigned int, but after a random delay to assist with FI armouring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint64__t}{ca\+\_\+uint64\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ca__ret__uint_ga9631c37319620809d70790b91b347f3c}\index{ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}!ca\_retfast\_u8@{ca\_retfast\_u8}}
+\index{ca\_retfast\_u8@{ca\_retfast\_u8}!ChipArmour Return Unsigned Integer structures and functions@{ChipArmour Return Unsigned Integer structures and functions}}
+\doxysubsubsection{\texorpdfstring{ca\_retfast\_u8()}{ca\_retfast\_u8()}}
+{\footnotesize\ttfamily \label{group__ca__ret__uint_ga9631c37319620809d70790b91b347f3c} 
+\doxymbox{\hyperlink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t}} ca\+\_\+retfast\+\_\+u8 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Returns an 8-\/bit unsigned int, but after a random delay to assist with FI armouring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to return.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structca__uint8__t}{ca\+\_\+uint8\+\_\+t} The value wrapped in a struct with its bitwise inverse for integrity checks. \texorpdfstring{$<$}{<} Chip\+Armour type for unsigned integer of specified bit size 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Type for unsigned integer of specified bit size \\
+\hline
+\end{DoxyParams}

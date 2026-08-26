@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['random_5fstate_5ft_0',['random_state_t',['../d6/d48/structrandom__state__t.html',1,'']]],
-  ['rasr_1',['RASR',['../df/d64/structARM__MPU__Region__t.html#a38c1d3bc6a9ffc9423d633add01928f1',1,'ARM_MPU_Region_t']]],
-  ['rbar_2',['RBAR',['../df/d64/structARM__MPU__Region__t.html#afe7a7721aa08988d915670efa432cdd2',1,'ARM_MPU_Region_t']]]
+  ['panic_0',['Panic',['../group__panic.html',1,'']]],
+  ['projects_20and_20templates_1',['Example Projects and Templates',['../md_README.html#autotoc_md1',1,'']]]
 ];

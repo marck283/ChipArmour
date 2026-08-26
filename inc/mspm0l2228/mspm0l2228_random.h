@@ -33,11 +33,11 @@ static inline void trng_fill(uint8_t *buf, uint32_t length) {
         while (!DL_TRNG_isCaptureReady(TRNG));
 
         uint32_t random_word = DL_TRNG_getCapture(TRNG);
-        uint32_t bytes_num = MIN(length, 4);
+        uint32_t bytes_num = u32_min(length, 4);
         memcpy(buf, &random_word, bytes_num);
 
         buf += bytes_num;
-        length -= MIN(length, bytes_num);
+        length -= u32_min(length, bytes_num);
     }
 }
 

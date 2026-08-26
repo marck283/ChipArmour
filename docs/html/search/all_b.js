@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['nonce_0',['nonce',['../d6/d48/structrandom__state__t.html#ae9d5d3cae205a41be28cd72f3baa7ec6',1,'random_state_t']]],
-  ['notes_1',['Legal and Other Notes',['../d0/d30/md_README.html#autotoc_md5',1,'']]]
+  ['mpu_20configuration_0',['MPU configuration',['../group__MSPM0L2228__MPU.html',1,'']]],
+  ['mpu_5fregion_5ft_1',['mpu_region_t',['../structmpu__region__t.html',1,'']]],
+  ['mpu_5fregions_5fnum_2',['MPU_REGIONS_NUM',['../group__MSPM0L2228__MPU.html#ga454a683dd6a4eaf9b26058643e250031',1,'mpu.h']]]
 ];

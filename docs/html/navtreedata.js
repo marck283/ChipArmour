@@ -25,20 +25,21 @@
 var NAVTREE =
 [
   [ "ChipArmour", "index.html", [
-    [ "ChipArmour™", "d0/d30/md_README.html", [
-      [ "Example Projects and Templates", "d0/d30/md_README.html#autotoc_md1", null ],
-      [ "Validation Environment", "d0/d30/md_README.html#autotoc_md2", [
-        [ "Use of Binary Libraries vs. Source Code", "d0/d30/md_README.html#autotoc_md3", null ]
+    [ "ChipArmour™", "md_README.html", [
+      [ "Example Projects and Templates", "md_README.html#autotoc_md1", null ],
+      [ "Validation Environment", "md_README.html#autotoc_md2", [
+        [ "Use of Binary Libraries vs. Source Code", "md_README.html#autotoc_md3", null ]
       ] ],
-      [ "Status of Library", "d0/d30/md_README.html#autotoc_md4", null ],
-      [ "Legal and Other Notes", "d0/d30/md_README.html#autotoc_md5", [
-        [ "Contributor Agreement", "d0/d30/md_README.html#autotoc_md6", null ],
-        [ "Security Disclosure, Bug Bounty", "d0/d30/md_README.html#autotoc_md7", null ],
-        [ "ChipArmour vs. ChipArmor", "d0/d30/md_README.html#autotoc_md8", null ],
-        [ "Trademark Disclaimers", "d0/d30/md_README.html#autotoc_md9", null ]
+      [ "Status of Library", "md_README.html#autotoc_md4", null ],
+      [ "Legal and Other Notes", "md_README.html#autotoc_md5", [
+        [ "Contributor Agreement", "md_README.html#autotoc_md6", null ],
+        [ "Security Disclosure, Bug Bounty", "md_README.html#autotoc_md7", null ],
+        [ "ChipArmour vs. ChipArmor", "md_README.html#autotoc_md8", null ],
+        [ "Trademark Disclaimers", "md_README.html#autotoc_md9", null ]
       ] ],
-      [ "Disclaimer", "d0/d30/md_README.html#autotoc_md10", null ]
+      [ "Disclaimer", "md_README.html#autotoc_md10", null ]
     ] ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

@@ -37,6 +37,7 @@
 
 #include "host_messaging.h"
 #include "security.h"
+#include "startup_mspm0l222x_ticlang.h"
 
 /* Linker variable that marks the top of the stack. */
 extern unsigned long __STACK_END;
@@ -171,8 +172,8 @@ void Reset_Handler(void)
  * @brief Remain in the lockdown path indefinitely.
  * @post This function never returns.
  */
-__attribute__((naked))
-static inline void loop_forever(void) {
+__attribute__((naked,noreturn))
+void loop_forever(void) {
     // Try to catch broken relative branching.
     MULT_128(__asm__("nop"));
     __asm__("target:");

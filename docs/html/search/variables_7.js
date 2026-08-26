@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rasr_0',['RASR',['../df/d64/structARM__MPU__Region__t.html#a38c1d3bc6a9ffc9423d633add01928f1',1,'ARM_MPU_Region_t']]],
-  ['rbar_1',['RBAR',['../df/d64/structARM__MPU__Region__t.html#afe7a7721aa08988d915670efa432cdd2',1,'ARM_MPU_Region_t']]]
+  ['local_5fvalue_0',['local_value',['../structca__ret__u64__state__t.html#aedb99bcd9d4d9b59d081743584726174',1,'ca_ret_u64_state_t::local_value'],['../structca__ret__u32__state__t.html#ae934d2cc874f4d5210c4c59ff9503ae8',1,'ca_ret_u32_state_t::local_value'],['../structca__ret__u16__state__t.html#a174b0da62ee1f999bb81a5e20cf1b0d4',1,'ca_ret_u16_state_t::local_value'],['../structca__ret__u8__state__t.html#aaeb5f2f2be512346393ccc5ced37fb48',1,'ca_ret_u8_state_t::local_value']]]
 ];

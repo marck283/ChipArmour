@@ -1,49 +1,49 @@
 #include "ca_ret_uint.h"
 
-ca_uint64_t _ca_ret_u64(ca_uint64_t value, ca_uint64_t magic, uint64_t maxdelay)
+CA_UINT_TYPE(64) _ca_ret_u64(CA_UINT_TYPE(64) value, CA_UINT_TYPE(64) magic, UINT_TYPE(64) maxdelay)
 {
-    __cmp_and_panic(magic.invvalue, (uint64_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(64)) ~magic.value, !=);
     _CA_RET_UINT(64, value, maxdelay);
-    __cmp_and_panic(magic.invvalue, (uint64_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(64)) ~magic.value, !=);
 }
 
-ca_uint64_t ca_retfast_u64(uint64_t value)
+CA_UINT_TYPE(64) ca_retfast_u64(UINT_TYPE(64) value)
 {
     return CA_RETFAST_INIT(64, value);
 }
 
-ca_uint32_t _ca_ret_u32(ca_uint32_t value, ca_uint32_t magic, uint32_t maxdelay)
+CA_UINT_TYPE(32) _ca_ret_u32(CA_UINT_TYPE(32) value, CA_UINT_TYPE(32) magic, UINT_TYPE(32) maxdelay)
 {
-    __cmp_and_panic(magic.invvalue, (uint32_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(32)) ~magic.value, !=);
     _CA_RET_UINT(32, value, maxdelay);
-    __cmp_and_panic(magic.invvalue, (uint32_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(32)) ~magic.value, !=);
 }
 
-ca_uint32_t ca_retfast_u32(uint32_t value)
+CA_UINT_TYPE(32) ca_retfast_u32(UINT_TYPE(32) value)
 {
     return CA_RETFAST_INIT(32, value);
 }
 
-ca_uint16_t _ca_ret_u16(ca_uint16_t value, ca_uint16_t magic, uint16_t maxdelay)
+CA_UINT_TYPE(16) _ca_ret_u16(CA_UINT_TYPE(16) value, CA_UINT_TYPE(16) magic, UINT_TYPE(16) maxdelay)
 {
-    __cmp_and_panic(magic.invvalue, (uint16_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(16)) ~magic.value, !=);
     _CA_RET_UINT(16, value, maxdelay);
-    __cmp_and_panic(magic.invvalue, (uint16_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(16)) ~magic.value, !=);
 }
 
-ca_uint16_t ca_retfast_u16(uint16_t value)
+CA_UINT_TYPE(16) ca_retfast_u16(UINT_TYPE(16) value)
 {
     return CA_RETFAST_INIT(16, value);
 }
 
-ca_uint8_t _ca_ret_u8(ca_uint8_t value, ca_uint8_t magic, uint8_t maxdelay)
+CA_UINT_TYPE(8) _ca_ret_u8(CA_UINT_TYPE(8) value, CA_UINT_TYPE(8) magic, UINT_TYPE(8) maxdelay)
 {
-    __cmp_and_panic(magic.invvalue, (uint8_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(8)) ~magic.value, !=);
     _CA_RET_UINT(8, value, maxdelay);
-    __cmp_and_panic(magic.invvalue, (uint8_t) ~magic.value, !=);
+    __cmp_and_panic(magic.invvalue, (UINT_TYPE(8)) ~magic.value, !=);
 }
 
-ca_uint8_t ca_retfast_u8(uint8_t value)
+CA_UINT_TYPE(8) ca_retfast_u8(UINT_TYPE(8) value)
 {
     return CA_RETFAST_INIT(8, value);
 }

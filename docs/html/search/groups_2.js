@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['panic_0',['Panic',['../db/d12/group__panic.html',1,'']]]
+  ['functions_0',['ChipArmour Return Unsigned Integer structures and functions',['../group__ca__ret__uint.html',1,'']]]
 ];

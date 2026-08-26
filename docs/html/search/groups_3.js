@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mpu_20configuration_0',['MPU configuration',['../dc/dae/group__MSPM0L2228__MPU.html',1,'']]]
+  ['integer_20structures_20and_20functions_0',['ChipArmour Return Unsigned Integer structures and functions',['../group__ca__ret__uint.html',1,'']]]
 ];
